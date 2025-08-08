@@ -10,6 +10,7 @@ const { getUserByUsername, getUserById } = require('./models/userdb')
 const { prisma } = require('./models/prisma')
 const { authRouter } = require('./routes/authrouter')
 const { userRouter } = require('./routes/userrouter')
+const { chatRouter } = require('./routes/chatrouter')
 
 const app = express()
 app.use(cors())
@@ -68,7 +69,10 @@ passport.deserializeUser(async (id, done) => {
 
 app.use(authRouter)
 app.use('/users', userRouter)
+app.use('/chats', chatRouter)
 
 app.listen(8080, () => {
   console.log('Server started')
 })
+
+//TODO: add error handling when req.body does not have required data
