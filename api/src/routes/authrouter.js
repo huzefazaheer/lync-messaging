@@ -5,7 +5,7 @@ const { signupController } = require('../controllers/authcontroller')
 
 const authRouter = Router()
 
-app.post(
+authRouter.post(
   '/login',
   passport.authenticate('local', {
     failureRedirect: '/',
@@ -13,6 +13,6 @@ app.post(
   }),
 )
 
-app.post('/signup', signupController)
+authRouter.post('/signup', signupController)
 
 module.exports = { authRouter }

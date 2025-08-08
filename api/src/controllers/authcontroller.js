@@ -15,4 +15,14 @@ async function signupController(req, res) {
   }
 }
 
-module.exports = { signupController }
+async function Auth(req, res, next) {
+  if (req.isAuthenticated()) next()
+  else res.status(401).json({ error: 'Unauthorised' })
+}
+
+async function isAdmin(req, res, next) {
+  if (req.user.type == 'ADMIN') next()
+  else res.status(401).json({ error: 'Unauthorised' })
+}
+
+module.exports = { signupController, Auth, isAdmin }

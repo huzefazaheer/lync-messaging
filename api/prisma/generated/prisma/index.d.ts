@@ -38,7 +38,15 @@ export type Message = $Result.DefaultSelection<Prisma.$MessagePayload>
  * Enums
  */
 export namespace $Enums {
-  export const ChatType: {
+  export const UserType: {
+  MEMBER: 'MEMBER',
+  ADMIN: 'ADMIN'
+};
+
+export type UserType = (typeof UserType)[keyof typeof UserType]
+
+
+export const ChatType: {
   DIRECT: 'DIRECT',
   GROUP: 'GROUP'
 };
@@ -54,6 +62,10 @@ export const MessageType: {
 export type MessageType = (typeof MessageType)[keyof typeof MessageType]
 
 }
+
+export type UserType = $Enums.UserType
+
+export const UserType: typeof $Enums.UserType
 
 export type ChatType = $Enums.ChatType
 
@@ -2271,6 +2283,7 @@ export namespace Prisma {
     password: string | null
     about: string | null
     profile_photo: string | null
+    type: $Enums.UserType | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -2280,6 +2293,7 @@ export namespace Prisma {
     password: string | null
     about: string | null
     profile_photo: string | null
+    type: $Enums.UserType | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -2289,6 +2303,7 @@ export namespace Prisma {
     password: number
     about: number
     profile_photo: number
+    type: number
     _all: number
   }
 
@@ -2300,6 +2315,7 @@ export namespace Prisma {
     password?: true
     about?: true
     profile_photo?: true
+    type?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -2309,6 +2325,7 @@ export namespace Prisma {
     password?: true
     about?: true
     profile_photo?: true
+    type?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -2318,6 +2335,7 @@ export namespace Prisma {
     password?: true
     about?: true
     profile_photo?: true
+    type?: true
     _all?: true
   }
 
@@ -2400,6 +2418,7 @@ export namespace Prisma {
     password: string
     about: string | null
     profile_photo: string | null
+    type: $Enums.UserType
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -2426,6 +2445,7 @@ export namespace Prisma {
     password?: boolean
     about?: boolean
     profile_photo?: boolean
+    type?: boolean
     friends?: boolean | User$friendsArgs<ExtArgs>
     friends_of?: boolean | User$friends_ofArgs<ExtArgs>
     chats?: boolean | User$chatsArgs<ExtArgs>
@@ -2439,6 +2459,7 @@ export namespace Prisma {
     password?: boolean
     about?: boolean
     profile_photo?: boolean
+    type?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2448,6 +2469,7 @@ export namespace Prisma {
     password?: boolean
     about?: boolean
     profile_photo?: boolean
+    type?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -2457,9 +2479,10 @@ export namespace Prisma {
     password?: boolean
     about?: boolean
     profile_photo?: boolean
+    type?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "display_name" | "username" | "password" | "about" | "profile_photo", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "display_name" | "username" | "password" | "about" | "profile_photo" | "type", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     friends?: boolean | User$friendsArgs<ExtArgs>
     friends_of?: boolean | User$friends_ofArgs<ExtArgs>
@@ -2483,6 +2506,7 @@ export namespace Prisma {
       password: string
       about: string | null
       profile_photo: string | null
+      type: $Enums.UserType
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -2915,6 +2939,7 @@ export namespace Prisma {
     readonly password: FieldRef<"User", 'String'>
     readonly about: FieldRef<"User", 'String'>
     readonly profile_photo: FieldRef<"User", 'String'>
+    readonly type: FieldRef<"User", 'UserType'>
   }
     
 
@@ -5540,7 +5565,8 @@ export namespace Prisma {
     username: 'username',
     password: 'password',
     about: 'about',
-    profile_photo: 'profile_photo'
+    profile_photo: 'profile_photo',
+    type: 'type'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -5619,6 +5645,20 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'UserType'
+   */
+  export type EnumUserTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserType'>
+    
+
+
+  /**
+   * Reference to a field of type 'UserType[]'
+   */
+  export type ListEnumUserTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'UserType[]'>
     
 
 
@@ -5724,6 +5764,7 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     about?: StringNullableFilter<"User"> | string | null
     profile_photo?: StringNullableFilter<"User"> | string | null
+    type?: EnumUserTypeFilter<"User"> | $Enums.UserType
     friends?: UserListRelationFilter
     friends_of?: UserListRelationFilter
     chats?: ChatListRelationFilter
@@ -5736,6 +5777,7 @@ export namespace Prisma {
     password?: SortOrder
     about?: SortOrderInput | SortOrder
     profile_photo?: SortOrderInput | SortOrder
+    type?: SortOrder
     friends?: UserOrderByRelationAggregateInput
     friends_of?: UserOrderByRelationAggregateInput
     chats?: ChatOrderByRelationAggregateInput
@@ -5751,6 +5793,7 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     about?: StringNullableFilter<"User"> | string | null
     profile_photo?: StringNullableFilter<"User"> | string | null
+    type?: EnumUserTypeFilter<"User"> | $Enums.UserType
     friends?: UserListRelationFilter
     friends_of?: UserListRelationFilter
     chats?: ChatListRelationFilter
@@ -5763,6 +5806,7 @@ export namespace Prisma {
     password?: SortOrder
     about?: SortOrderInput | SortOrder
     profile_photo?: SortOrderInput | SortOrder
+    type?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -5778,6 +5822,7 @@ export namespace Prisma {
     password?: StringWithAggregatesFilter<"User"> | string
     about?: StringNullableWithAggregatesFilter<"User"> | string | null
     profile_photo?: StringNullableWithAggregatesFilter<"User"> | string | null
+    type?: EnumUserTypeWithAggregatesFilter<"User"> | $Enums.UserType
   }
 
   export type ChatWhereInput = {
@@ -5934,6 +5979,7 @@ export namespace Prisma {
     password: string
     about?: string | null
     profile_photo?: string | null
+    type?: $Enums.UserType
     friends?: UserCreateNestedManyWithoutFriends_ofInput
     friends_of?: UserCreateNestedManyWithoutFriendsInput
     chats?: ChatCreateNestedManyWithoutChat_usersInput
@@ -5946,6 +5992,7 @@ export namespace Prisma {
     password: string
     about?: string | null
     profile_photo?: string | null
+    type?: $Enums.UserType
     friends?: UserUncheckedCreateNestedManyWithoutFriends_ofInput
     friends_of?: UserUncheckedCreateNestedManyWithoutFriendsInput
     chats?: ChatUncheckedCreateNestedManyWithoutChat_usersInput
@@ -5958,6 +6005,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     profile_photo?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     friends?: UserUpdateManyWithoutFriends_ofNestedInput
     friends_of?: UserUpdateManyWithoutFriendsNestedInput
     chats?: ChatUpdateManyWithoutChat_usersNestedInput
@@ -5970,6 +6018,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     profile_photo?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     friends?: UserUncheckedUpdateManyWithoutFriends_ofNestedInput
     friends_of?: UserUncheckedUpdateManyWithoutFriendsNestedInput
     chats?: ChatUncheckedUpdateManyWithoutChat_usersNestedInput
@@ -5982,6 +6031,7 @@ export namespace Prisma {
     password: string
     about?: string | null
     profile_photo?: string | null
+    type?: $Enums.UserType
   }
 
   export type UserUpdateManyMutationInput = {
@@ -5991,6 +6041,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     profile_photo?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -6000,6 +6051,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     profile_photo?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
   }
 
   export type ChatCreateInput = {
@@ -6194,6 +6246,13 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type EnumUserTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserType | EnumUserTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserTypeFilter<$PrismaModel> | $Enums.UserType
+  }
+
   export type UserListRelationFilter = {
     every?: UserWhereInput
     some?: UserWhereInput
@@ -6226,6 +6285,7 @@ export namespace Prisma {
     password?: SortOrder
     about?: SortOrder
     profile_photo?: SortOrder
+    type?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -6235,6 +6295,7 @@ export namespace Prisma {
     password?: SortOrder
     about?: SortOrder
     profile_photo?: SortOrder
+    type?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -6244,6 +6305,7 @@ export namespace Prisma {
     password?: SortOrder
     about?: SortOrder
     profile_photo?: SortOrder
+    type?: SortOrder
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -6262,6 +6324,16 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type EnumUserTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserType | EnumUserTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserTypeWithAggregatesFilter<$PrismaModel> | $Enums.UserType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUserTypeFilter<$PrismaModel>
+    _max?: NestedEnumUserTypeFilter<$PrismaModel>
   }
 
   export type EnumChatTypeFilter<$PrismaModel = never> = {
@@ -6398,6 +6470,10 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type EnumUserTypeFieldUpdateOperationsInput = {
+    set?: $Enums.UserType
   }
 
   export type UserUpdateManyWithoutFriends_ofNestedInput = {
@@ -6661,6 +6737,13 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
+  export type NestedEnumUserTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserType | EnumUserTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserTypeFilter<$PrismaModel> | $Enums.UserType
+  }
+
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -6687,6 +6770,16 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumUserTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.UserType | EnumUserTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.UserType[] | ListEnumUserTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumUserTypeWithAggregatesFilter<$PrismaModel> | $Enums.UserType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumUserTypeFilter<$PrismaModel>
+    _max?: NestedEnumUserTypeFilter<$PrismaModel>
   }
 
   export type NestedEnumChatTypeFilter<$PrismaModel = never> = {
@@ -6730,6 +6823,7 @@ export namespace Prisma {
     password: string
     about?: string | null
     profile_photo?: string | null
+    type?: $Enums.UserType
     friends?: UserCreateNestedManyWithoutFriends_ofInput
     chats?: ChatCreateNestedManyWithoutChat_usersInput
   }
@@ -6741,6 +6835,7 @@ export namespace Prisma {
     password: string
     about?: string | null
     profile_photo?: string | null
+    type?: $Enums.UserType
     friends?: UserUncheckedCreateNestedManyWithoutFriends_ofInput
     chats?: ChatUncheckedCreateNestedManyWithoutChat_usersInput
   }
@@ -6757,6 +6852,7 @@ export namespace Prisma {
     password: string
     about?: string | null
     profile_photo?: string | null
+    type?: $Enums.UserType
     friends_of?: UserCreateNestedManyWithoutFriendsInput
     chats?: ChatCreateNestedManyWithoutChat_usersInput
   }
@@ -6768,6 +6864,7 @@ export namespace Prisma {
     password: string
     about?: string | null
     profile_photo?: string | null
+    type?: $Enums.UserType
     friends_of?: UserUncheckedCreateNestedManyWithoutFriendsInput
     chats?: ChatUncheckedCreateNestedManyWithoutChat_usersInput
   }
@@ -6822,6 +6919,7 @@ export namespace Prisma {
     password?: StringFilter<"User"> | string
     about?: StringNullableFilter<"User"> | string | null
     profile_photo?: StringNullableFilter<"User"> | string | null
+    type?: EnumUserTypeFilter<"User"> | $Enums.UserType
   }
 
   export type UserUpsertWithWhereUniqueWithoutFriendsInput = {
@@ -6872,6 +6970,7 @@ export namespace Prisma {
     password: string
     about?: string | null
     profile_photo?: string | null
+    type?: $Enums.UserType
     friends?: UserCreateNestedManyWithoutFriends_ofInput
     friends_of?: UserCreateNestedManyWithoutFriendsInput
   }
@@ -6883,6 +6982,7 @@ export namespace Prisma {
     password: string
     about?: string | null
     profile_photo?: string | null
+    type?: $Enums.UserType
     friends?: UserUncheckedCreateNestedManyWithoutFriends_ofInput
     friends_of?: UserUncheckedCreateNestedManyWithoutFriendsInput
   }
@@ -7007,6 +7107,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     profile_photo?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     friends?: UserUpdateManyWithoutFriends_ofNestedInput
     chats?: ChatUpdateManyWithoutChat_usersNestedInput
   }
@@ -7018,6 +7119,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     profile_photo?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     friends?: UserUncheckedUpdateManyWithoutFriends_ofNestedInput
     chats?: ChatUncheckedUpdateManyWithoutChat_usersNestedInput
   }
@@ -7029,6 +7131,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     profile_photo?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
   }
 
   export type UserUpdateWithoutFriendsInput = {
@@ -7038,6 +7141,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     profile_photo?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     friends_of?: UserUpdateManyWithoutFriendsNestedInput
     chats?: ChatUpdateManyWithoutChat_usersNestedInput
   }
@@ -7049,6 +7153,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     profile_photo?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     friends_of?: UserUncheckedUpdateManyWithoutFriendsNestedInput
     chats?: ChatUncheckedUpdateManyWithoutChat_usersNestedInput
   }
@@ -7060,6 +7165,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     profile_photo?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
   }
 
   export type ChatUpdateWithoutChat_usersInput = {
@@ -7095,6 +7201,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     profile_photo?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     friends?: UserUpdateManyWithoutFriends_ofNestedInput
     friends_of?: UserUpdateManyWithoutFriendsNestedInput
   }
@@ -7106,6 +7213,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     profile_photo?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
     friends?: UserUncheckedUpdateManyWithoutFriends_ofNestedInput
     friends_of?: UserUncheckedUpdateManyWithoutFriendsNestedInput
   }
@@ -7117,6 +7225,7 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     about?: NullableStringFieldUpdateOperationsInput | string | null
     profile_photo?: NullableStringFieldUpdateOperationsInput | string | null
+    type?: EnumUserTypeFieldUpdateOperationsInput | $Enums.UserType
   }
 
   export type MessageUpdateWithoutChatInput = {

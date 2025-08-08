@@ -133,7 +133,8 @@ exports.Prisma.UserScalarFieldEnum = {
   username: 'username',
   password: 'password',
   about: 'about',
-  profile_photo: 'profile_photo'
+  profile_photo: 'profile_photo',
+  type: 'type'
 };
 
 exports.Prisma.ChatScalarFieldEnum = {
@@ -163,6 +164,11 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.UserType = exports.$Enums.UserType = {
+  MEMBER: 'MEMBER',
+  ADMIN: 'ADMIN'
+};
+
 exports.ChatType = exports.$Enums.ChatType = {
   DIRECT: 'DIRECT',
   GROUP: 'GROUP'

@@ -71,10 +71,6 @@ passport.deserializeUser(async (id, done) => {
 
 app.use(authRouter)
 
-app.get('/', (req, res) => {
-  console.log(req.user)
-})
-
 app.listen(8080, () => {
   console.log('Server started')
 })
