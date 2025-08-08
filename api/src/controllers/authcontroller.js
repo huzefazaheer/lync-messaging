@@ -15,7 +15,7 @@ async function signupController(req, res) {
   }
 }
 
-async function Auth(req, res, next) {
+async function isAuth(req, res, next) {
   if (req.isAuthenticated()) next()
   else res.status(401).json({ error: 'Unauthorised' })
 }
@@ -25,4 +25,4 @@ async function isAdmin(req, res, next) {
   else res.status(401).json({ error: 'Unauthorised' })
 }
 
-module.exports = { signupController, Auth, isAdmin }
+module.exports = { signupController, isAuth, isAdmin }

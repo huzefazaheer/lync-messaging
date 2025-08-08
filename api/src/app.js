@@ -6,13 +6,10 @@ const expressSession = require('express-session')
 const LocalStrategy = require('passport-local').Strategy
 const { PrismaSessionStore } = require('@quixo3/prisma-session-store')
 
-const {
-  getUserByUsername,
-  getUserById,
-  createUser,
-} = require('./models/authdb')
+const { getUserByUsername, getUserById } = require('./models/userdb')
 const { prisma } = require('./models/prisma')
 const { authRouter } = require('./routes/authrouter')
+const { userRouter } = require('./routes/userrouter')
 
 const app = express()
 app.use(cors())
@@ -70,6 +67,7 @@ passport.deserializeUser(async (id, done) => {
 })
 
 app.use(authRouter)
+app.use('/users', userRouter)
 
 app.listen(8080, () => {
   console.log('Server started')
