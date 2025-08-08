@@ -12,6 +12,7 @@ const {
   createUser,
 } = require('./models/authdb')
 const { prisma } = require('./models/prisma')
+const { authRouter } = require('./routes/authrouter')
 
 const app = express()
 app.use(cors())
@@ -68,27 +69,7 @@ passport.deserializeUser(async (id, done) => {
   }
 })
 
-app.post(
-  '/login',
-  passport.authenticate('local', {
-    failureRedirect: '/',
-    successRedirect: '/',
-  }),
-)
-
-app.post('/signup', async (req, res) => {
-  const username = req.body.username
-  const password = req.body.password
-  const display_name = req.body.display_name
-  const hashedPassword = await bcrypt.hash(password, 10)
-  try {
-    const user = await createUser(display_name, username, hashedPassword)
-    res.status(200).json({ success: user })
-  } catch (error) {
-    console.log(error)
-    res.status(500).json({ error: 'Internal Database Error' })
-  }
-})
+app.use(authRouter)
 
 app.get('/', (req, res) => {
   console.log(req.user)
