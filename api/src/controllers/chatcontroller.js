@@ -22,7 +22,7 @@ async function createChatController(req, res) {
   try {
     const userIds = JSON.parse(req.body.users)
     const chat = await createChat(req.user.id, userIds)
-    console.log(chat)
+    res.json(chat)
   } catch (error) {
     console.log(error)
     res.status(500).json({ error: 'Internal Database Error' })

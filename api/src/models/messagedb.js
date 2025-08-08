@@ -15,9 +15,9 @@ async function getChatMessages(chatId) {
   return messages
 }
 
-async function createMessage(chatId, userId, message) {
+async function createMessage(chatId, userId, text) {
   const message = await prisma.message.create({
-    data: { text: message, chatId: chatId, authorId: userId },
+    data: { text: text, chatId: chatId, authorId: userId, type: 'DEFAULT' },
   })
   return message
 }
