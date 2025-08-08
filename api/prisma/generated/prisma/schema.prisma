@@ -16,16 +16,17 @@ model Session {
 }
 
 model User {
-  id            String   @id @unique @default(uuid())
+  id            String    @id @unique @default(uuid())
   display_name  String
-  username      String   @unique
+  username      String    @unique
   password      String
   about         String?
   profile_photo String?
-  friends       User[]   @relation("userfriends")
-  friends_of    User[]   @relation("userfriends")
-  chats         Chat[]   @relation("userchats")
-  type          UserType @default(MEMBER)
+  friends       User[]    @relation("userfriends")
+  friends_of    User[]    @relation("userfriends")
+  chats         Chat[]    @relation("userchats")
+  messages      Message[] @relation("usermessages")
+  type          UserType  @default(MEMBER)
 }
 
 model Chat {
@@ -38,8 +39,11 @@ model Chat {
 
 model Message {
   id        String      @id @unique @default(uuid())
+  text      String
   chat      Chat        @relation("chatmessage", fields: [chatId], references: [id])
   chatId    String
+  author    User        @relation("usermessages", fields: [authorId], references: [id])
+  authorId  String
   type      MessageType
   time_sent DateTime    @default(now())
 }
