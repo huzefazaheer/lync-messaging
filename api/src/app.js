@@ -38,9 +38,9 @@ passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
       const user = await getUserByUsername(username)
-      if (!user) done(null, null)
+      if (!user) done(null, false)
       const passwordMatch = await bcrypt.compare(password, user.password)
-      if (!passwordMatch) done(null, null)
+      if (!passwordMatch) done(null, false)
       done(null, user)
     } catch (error) {
       done(error, null)
@@ -59,8 +59,8 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await getUserById(id)
-    if (user) done(null, user)
-    done(null, null)
+    if (user) return done(null, user)
+    done(null, false)
   } catch (error) {
     done(error, null)
   }
