@@ -7,7 +7,7 @@
   justify-content: center;
   align-items: center;
   padding: 40px 60px;
-  margin-top: 60px;
+  margin-top: 140px;
 }
 
 .authform * {
@@ -87,11 +87,12 @@
   background-color: var(--button-active);
 }
 
-.authform .link {
+.authform .link a {
   color: var(--color-accent);
+  text-decoration: none;
 }
 
-.authform .link:hover {
+.authform .link:hover a {
   text-decoration: underline;
   cursor: default;
 }
@@ -104,7 +105,7 @@
   background-color: rgb(142, 31, 31);
   color: white;
   border-radius: 4px;
-  padding: 4px 6px;
+  padding: 6px 8px;
   font-size: 12px;
   width: fit-content;
 }

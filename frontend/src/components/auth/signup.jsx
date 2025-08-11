@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import styles from './styles.module.css'
+import { Link } from 'react-router-dom'
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false)
@@ -55,7 +56,10 @@ export default function SignUp() {
           Continue as Guest
         </button>
         <p>
-          Already have an account? <span className={styles.link}>Login</span>
+          Already have an account?{' '}
+          <span className={styles.link}>
+            <Link to={'/login'}>Login</Link>
+          </span>
         </p>
       </div>
     </>
