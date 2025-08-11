@@ -14,7 +14,7 @@ const { chatRouter } = require('./routes/chatrouter')
 const { messageRouter } = require('./routes/messagerouter')
 
 const app = express()
-app.use(cors())
+app.use(cors({ credentials: true }))
 
 app.use(
   expressSession({
