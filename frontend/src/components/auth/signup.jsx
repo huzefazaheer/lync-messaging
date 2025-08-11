@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import styles from './styles.module.css'
 import { Link } from 'react-router-dom'
+import checkPassword from '../../utils/checkPassword'
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false)
@@ -10,10 +11,28 @@ export default function SignUp() {
   const [error, setError] = useState('')
 
   async function handleSignup() {
-    if (!showPassword && username != '') {
+    if (username == '') {
+      setError('Please choose a username')
+      return
+    }
+    if (!showPassword) {
       setShowPassword(true)
       return
-    } else setError('Please provide your username')
+    }
+    if (password == '') {
+      setError('Please create a password')
+      return
+    }
+    const passwordSecurityError = checkPassword(password)
+    if (passwordSecurityError) {
+      setError(passwordSecurityError)
+      return
+    }
+    if (password !== password2) {
+      setError('Passwords do not match')
+      return
+    }
+    setError('')
   }
 
   return (

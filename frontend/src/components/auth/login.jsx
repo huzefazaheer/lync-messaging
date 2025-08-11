@@ -9,10 +9,19 @@ export default function Login() {
   const [error, setError] = useState('')
 
   async function handleLogin() {
-    if (!showPassword && username != '') {
+    if (username == '') {
+      setError('Please provide your username')
+      return
+    }
+    if (!showPassword) {
       setShowPassword(true)
       return
-    } else setError('Please provide your username')
+    }
+    if (password == '') {
+      setError('Please provide your password')
+      return
+    }
+    setError('')
   }
 
   return (
