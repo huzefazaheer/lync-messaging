@@ -1,0 +1,72 @@
+.authform {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  width: 25%;
+  justify-content: center;
+  /* border: 1px solid var(--color-border); */
+  padding: 40px 60px;
+  margin-top: 80px;
+  /* box-shadow: 2px 1px 2px rgba(129, 129, 129, 0.518); */
+}
+
+.authform label {
+  margin-bottom: 5px;
+}
+
+.authform input {
+  border-radius: 9px;
+  padding: 8px 10px;
+  border: 1px solid #7d7d7d;
+  margin-bottom: 10px;
+  color: #4d4d4d;
+  font-size: 14px;
+}
+
+.authform input:focus {
+  outline: 1px solid var(--color-accent);
+}
+
+.authform button {
+  background-color: var(--color-accent);
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 9px;
+  margin-top: 2rem;
+}
+
+.authform button:hover {
+  background-color: var(--button-hover);
+}
+
+.authform button:active {
+  background-color: var(--button-active);
+}
+
+.authform button.secondary {
+  background-color: white;
+  padding: 10px 20px;
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent);
+  border-radius: 9px;
+  margin-top: 0.5rem;
+}
+
+.authform button.secondary:hover {
+  background-color: var(--button-hover-2);
+}
+
+.authform button.secondary:active {
+  background-color: var(--button-active-2);
+}
+
+.authform .link {
+  color: var(--color-accent);
+}
+
+.authform .link:hover {
+  text-decoration: underline;
+  cursor: default;
+}
