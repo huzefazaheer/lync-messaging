@@ -1,9 +1,9 @@
 :root {
   font-family: Helvetica, sans-serif;
   --color-accent: #284b63;
+  --color-secondary: #f4f6f7;
   --color-border: #d7d7d7;
-  --button-hover: #376584;
-  --button-active: #183345;
+  --button-hover: #4882a9;
+  --button-active: #0c1a22;
   --button-hover-2: #c7d3dd;
-  --button-active-2: #bed1e0;
 }
