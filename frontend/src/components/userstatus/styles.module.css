@@ -1,0 +1,10 @@
+.userstatus {
+  position: relative;
+  width: fit-content;
+}
+
+.status {
+  position: absolute;
+  bottom: 2px;
+  right: 0;
+}

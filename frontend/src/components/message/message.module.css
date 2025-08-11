@@ -1,0 +1,36 @@
+.usercard {
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.usercard img {
+  flex-basis: 44px;
+  height: 44px;
+}
+
+.displayname {
+  font-weight: bold;
+  margin: 0;
+}
+
+.username {
+  color: #494a4a;
+  margin: 0;
+}
+
+.msg {
+  width: 280px;
+  padding: 20px;
+  border-radius: 9px;
+}
+
+.msg p {
+  color: #686767;
+  font-size: 14px;
+}
+
+.active {
+  background-color: #f8f8f8;
+}
