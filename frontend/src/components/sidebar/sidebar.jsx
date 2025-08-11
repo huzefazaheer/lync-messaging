@@ -6,7 +6,7 @@ export default function Sidebar() {
       <div className={styles.sidebar}>
         <div className={styles.logo}>
           <img src="/logo.svg" alt="" />
-          <p>Lynk Messaging</p>
+          <p>Lync Messaging</p>
         </div>
         <div className={styles.menu}>
           <div>

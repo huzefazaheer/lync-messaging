@@ -3,6 +3,8 @@ import styles from './styles.module.css'
 import { Link } from 'react-router-dom'
 import checkPassword from '../../utils/checkPassword'
 
+//TODO add user response on signup
+
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false)
   const [username, setUsername] = useState('')
@@ -10,7 +12,7 @@ export default function SignUp() {
   const [password2, setPassword2] = useState('')
   const [error, setError] = useState('')
 
-  async function handleSignup() {
+  function handleSignup() {
     if (username == '') {
       setError('Please choose a username')
       return
@@ -33,6 +35,31 @@ export default function SignUp() {
       return
     }
     setError('')
+    sendRequest()
+  }
+
+  function sendRequest() {
+    if (username == '' || password == '') return
+
+    const myHeaders = new Headers()
+    myHeaders.append('Content-Type', 'application/x-www-form-urlencoded')
+
+    const urlencoded = new URLSearchParams()
+    urlencoded.append('username', username)
+    urlencoded.append('password', password)
+    urlencoded.append('display_name', username)
+
+    const requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: urlencoded,
+      credentials: 'include',
+    }
+
+    fetch('http://localhost:8080/signup', requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.error(error))
   }
 
   return (

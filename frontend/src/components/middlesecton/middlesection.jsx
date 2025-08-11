@@ -2,6 +2,7 @@ import styles from './styles.module.css'
 
 import UserStatus from '../../components/userstatus/userstatus'
 import Message from '../../components/message/message'
+import { useEffect } from 'react'
 
 export default function MiddleSec() {
   return (
