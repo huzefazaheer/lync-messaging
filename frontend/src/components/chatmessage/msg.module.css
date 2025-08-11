@@ -1,0 +1,17 @@
+.txtmsg {
+  width: fit-content;
+  padding: 8px 16px;
+  border-radius: 9px;
+  max-width: 70%;
+}
+
+.sent {
+  background-color: #284b63;
+  color: white;
+  margin-left: auto;
+}
+
+.received {
+  background-color: #f4f6f7;
+  color: black;
+}

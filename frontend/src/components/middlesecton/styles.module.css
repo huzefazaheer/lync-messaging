@@ -50,4 +50,5 @@ hr {
 .msgs {
   max-height: 450px;
   overflow-y: scroll;
+  scrollbar-width: none;
 }
