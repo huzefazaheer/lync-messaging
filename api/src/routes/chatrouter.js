@@ -8,7 +8,7 @@ const {
 
 const chatRouter = Router()
 
-chatRouter.get('/', isAuth, isAdmin, getAllChatsController)
+chatRouter.get('/', isAuth, getAllChatsController)
 
 chatRouter.get('/:id', isAuth, getChatController)
 

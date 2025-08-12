@@ -1,9 +1,15 @@
 const { getAllChats, getChatById, createChat } = require('../models/chatsdb')
+const { getUserChats } = require('../models/userdb')
 
 async function getAllChatsController(req, res) {
   try {
-    const chats = await getAllChats()
-    res.json(chats)
+    if (req.user.type != 'ADMIN') {
+      const chats = await getUserChats(req.user.id)
+      res.json(chats)
+    } else {
+      const chats = await getAllChats()
+      res.json(chats)
+    }
   } catch (error) {
     res.status(500).json({ error: 'Internal Database Error' })
   }

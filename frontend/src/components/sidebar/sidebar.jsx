@@ -1,6 +1,10 @@
+import { useContext } from 'react'
 import styles from './sidebar.module.css'
+import { appContext } from '../../App'
 
 export default function Sidebar() {
+  const { user } = useContext(appContext)
+
   return (
     <>
       <div className={styles.sidebar}>
@@ -37,10 +41,19 @@ export default function Sidebar() {
         </div>
 
         <div className={styles.usercard}>
-          <img src="/profileimg.png" alt="" />
+          <img
+            src={
+              user?.profile_picture ? user.profile_picture : '/profileimg.png'
+            }
+            alt=""
+          />
           <div>
-            <p className={styles.displayname}>John Doe</p>
-            <p className={styles.username}>@exampleuser</p>
+            <p className={styles.displayname}>
+              {user?.display_name ? user.display_name : ''}
+            </p>
+            <p className={styles.username}>
+              @{user?.username ? user.username : ''}
+            </p>
           </div>
           <img className={styles.logout} src="/logout.svg" alt="" />
         </div>
