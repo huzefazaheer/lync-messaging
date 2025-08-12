@@ -15,6 +15,13 @@ async function getUserByUsername(username) {
   return user
 }
 
+async function getUserBySearch(name) {
+  const user =
+    await prisma.$queryRaw`SELECT id, username, display_name FROM "User" WHERE 'username' LIKE ${`%${name}%`};`
+
+  return user
+}
+
 async function getUserFriends(id) {
   const userFriends = await prisma.user.findUnique({
     where: { id: id },
@@ -47,4 +54,5 @@ module.exports = {
   getUserFriends,
   addUserFriend,
   getUserChats,
+  getUserBySearch,
 }

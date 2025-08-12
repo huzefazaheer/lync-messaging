@@ -15,14 +15,14 @@ export default function Chat() {
         </div>
       </div>
       <div className={styles.msgs}>
-        <ChatMessage msg={'Hello this is a message'} />
+        {/* <ChatMessage msg={'Hello this is a message'} />
         <ChatMessage msg={'This is a person'} isSent={true} />
         <ChatMessage
           msg={
             'This is a particularly long message\noasudhuoasduoash This is a particularly long message\noasudhuoasduoash'
           }
           isSent={true}
-        />
+        /> */}
       </div>
       <div className={styles.sendmsg}>
         <textarea></textarea>

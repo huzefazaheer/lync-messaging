@@ -4,10 +4,13 @@ const {
   getUserController,
   addFriendController,
   getUserChatsController,
+  getUserByUsernameController,
 } = require('../controllers/usercontroller')
 const { isAuth, isAdmin } = require('../controllers/authcontroller')
 
 const userRouter = Router()
+
+userRouter.get('/:username', isAuth, getUserByUsernameController)
 
 userRouter.get('/', isAuth, isAdmin, getAllUsersController)
 
