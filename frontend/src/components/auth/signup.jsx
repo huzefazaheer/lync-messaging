@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import styles from './styles.module.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import checkPassword from '../../utils/checkPassword'
+import { appContext } from '../../App'
 
 //TODO add user response on signup
 
@@ -11,6 +12,10 @@ export default function SignUp() {
   const [password, setPassword] = useState('')
   const [password2, setPassword2] = useState('')
   const [error, setError] = useState('')
+
+  const app = useContext(appContext)
+
+  const navigate = useNavigate()
 
   function handleSignup() {
     if (username == '') {
@@ -38,28 +43,39 @@ export default function SignUp() {
     sendRequest()
   }
 
-  function sendRequest() {
+  async function sendRequest() {
     if (username == '' || password == '') return
-
-    const myHeaders = new Headers()
-    myHeaders.append('Content-Type', 'application/x-www-form-urlencoded')
-
-    const urlencoded = new URLSearchParams()
-    urlencoded.append('username', username)
-    urlencoded.append('password', password)
-    urlencoded.append('display_name', username)
-
-    const requestOptions = {
+    const response = await fetch('http://localhost:8080/signup', {
       method: 'POST',
-      headers: myHeaders,
-      body: urlencoded,
+      headers: {
+        'Content-Type': 'application/json',
+      },
       credentials: 'include',
+      body: JSON.stringify({
+        username: username,
+        password: password,
+        display_name: username,
+      }),
+    })
+    const data = await response.json()
+    if (data.error) {
+      setError('Username already exists')
+    } else {
+      const response = await fetch('http://localhost:8080/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          username: username,
+          password: password,
+        }),
+      })
+      const data = await response.json()
+      app.setUser(data.user)
+      navigate('/')
     }
-
-    fetch('http://localhost:8080/signup', requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.error(error))
   }
 
   return (

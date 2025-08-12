@@ -14,14 +14,14 @@ const { chatRouter } = require('./routes/chatrouter')
 const { messageRouter } = require('./routes/messagerouter')
 
 const app = express()
-app.use(cors({ credentials: true }))
+app.use(cors({ credentials: true, origin: true }))
 
 app.use(
   expressSession({
     cookie: {
       maxAge: 7 * 24 * 60 * 60 * 1000, // ms
     },
-    secret: 'a santa at nasa',
+    secret: 'a santa at nasa 123',
     resave: true,
     saveUninitialized: true,
     store: new PrismaSessionStore(prisma, {
@@ -40,9 +40,9 @@ passport.use(
   new LocalStrategy(async (username, password, done) => {
     try {
       const user = await getUserByUsername(username)
-      if (!user) done(null, false)
+      if (!user) return done(null, false)
       const passwordMatch = await bcrypt.compare(password, user.password)
-      if (!passwordMatch) done(null, false)
+      if (!passwordMatch) return done(null, false)
       done(null, user)
     } catch (error) {
       done(error, null)

@@ -11,8 +11,24 @@ export default function Home() {
   const app = useContext(appContext)
   const navigate = useNavigate()
 
+  async function getUserSession() {
+    const response = await fetch('http://localhost:8080/isloggedin', {
+      method: 'GET',
+      credentials: 'include',
+    })
+    const data = await response.json()
+    console.log(data)
+    if (data.error) {
+      navigate('/login')
+    } else {
+      app.setUser(data.user)
+    }
+  }
+
   useEffect(() => {
-    if (app.user == null) navigate('/login')
+    if (app.user == null) {
+      getUserSession()
+    }
   }, [])
 
   return (

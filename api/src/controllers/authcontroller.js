@@ -8,7 +8,7 @@ async function signupController(req, res) {
   const hashedPassword = await bcrypt.hash(password, 10)
   try {
     const user = await createUser(display_name, username, hashedPassword)
-    res.status(200).json({ success: user })
+    res.status(200).json({ success: 'Success' })
   } catch (error) {
     console.log(error)
     res.status(500).json({ error: 'Internal Database Error' })

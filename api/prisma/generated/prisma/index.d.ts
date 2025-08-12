@@ -6200,7 +6200,7 @@ export namespace Prisma {
   export type MessageCreateInput = {
     id?: string
     text: string
-    type: $Enums.MessageType
+    type?: $Enums.MessageType
     time_sent?: Date | string
     chat: ChatCreateNestedOneWithoutMessagesInput
     author: UserCreateNestedOneWithoutMessagesInput
@@ -6211,7 +6211,7 @@ export namespace Prisma {
     text: string
     chatId: string
     authorId: string
-    type: $Enums.MessageType
+    type?: $Enums.MessageType
     time_sent?: Date | string
   }
 
@@ -6238,7 +6238,7 @@ export namespace Prisma {
     text: string
     chatId: string
     authorId: string
-    type: $Enums.MessageType
+    type?: $Enums.MessageType
     time_sent?: Date | string
   }
 
@@ -7073,7 +7073,7 @@ export namespace Prisma {
   export type MessageCreateWithoutAuthorInput = {
     id?: string
     text: string
-    type: $Enums.MessageType
+    type?: $Enums.MessageType
     time_sent?: Date | string
     chat: ChatCreateNestedOneWithoutMessagesInput
   }
@@ -7082,7 +7082,7 @@ export namespace Prisma {
     id?: string
     text: string
     chatId: string
-    type: $Enums.MessageType
+    type?: $Enums.MessageType
     time_sent?: Date | string
   }
 
@@ -7228,7 +7228,7 @@ export namespace Prisma {
   export type MessageCreateWithoutChatInput = {
     id?: string
     text: string
-    type: $Enums.MessageType
+    type?: $Enums.MessageType
     time_sent?: Date | string
     author: UserCreateNestedOneWithoutMessagesInput
   }
@@ -7237,7 +7237,7 @@ export namespace Prisma {
     id?: string
     text: string
     authorId: string
-    type: $Enums.MessageType
+    type?: $Enums.MessageType
     time_sent?: Date | string
   }
 
@@ -7399,7 +7399,7 @@ export namespace Prisma {
     id?: string
     text: string
     chatId: string
-    type: $Enums.MessageType
+    type?: $Enums.MessageType
     time_sent?: Date | string
   }
 
@@ -7523,7 +7523,7 @@ export namespace Prisma {
     id?: string
     text: string
     authorId: string
-    type: $Enums.MessageType
+    type?: $Enums.MessageType
     time_sent?: Date | string
   }
 

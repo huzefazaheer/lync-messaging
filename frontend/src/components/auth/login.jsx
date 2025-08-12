@@ -32,37 +32,27 @@ export default function Login() {
     sendData()
   }
 
-  function sendData() {
-    const myHeaders = new Headers()
-    myHeaders.append('Content-Type', 'application/x-www-form-urlencoded')
-    myHeaders.append(
-      'Cookie',
-      'connect.sid=s%3AjWQiWC5mkPXPIUmTRJj9G0D4w3kU_vmU.9JW08naE%2FqWqnomT1z2S7f2FPRhGeNqjIIDciGpDWIo',
-    )
-
-    const urlencoded = new URLSearchParams()
-    urlencoded.append('username', username)
-    urlencoded.append('password', password)
-
-    const requestOptions = {
+  async function sendData() {
+    if (username == '' || password == '') return
+    const response = await fetch('http://localhost:8080/login', {
       method: 'POST',
-      headers: myHeaders,
-      body: urlencoded,
-      redirect: 'follow',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        username: username,
+        password: password,
+      }),
+    })
+    const data = await response.json()
+    console.log(data)
+    if (data.error) {
+      setError('Invalid username or password')
+    } else {
+      app.setUser(data.user)
+      navigate('/')
     }
-
-    fetch('http://localhost:8080/login', requestOptions)
-      .then((response) => response.text())
-      .then((result) => {
-        const data = JSON.parse(result)
-        if (data.message == 'Internal server error') {
-          setError('Invalid username or password')
-        } else {
-          app.setUser(data.user)
-          navigate('/')
-        }
-      })
-      .catch((error) => console.log(error))
   }
 
   return (

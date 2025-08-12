@@ -44,7 +44,7 @@ model Message {
   chatId    String
   author    User        @relation("usermessages", fields: [authorId], references: [id])
   authorId  String
-  type      MessageType
+  type      MessageType @default(DEFAULT)
   time_sent DateTime    @default(now())
 }
 
