@@ -1,8 +1,8 @@
 import styles from './message.module.css'
 
-export default function Message({ active }) {
+export default function Message({ key, active, chat }) {
   return (
-    <div className={`${styles.msg} ${active ? styles.active : ''}`}>
+    <div key={key} className={`${styles.msg} ${active ? styles.active : ''}`}>
       <div className={styles.usercard}>
         <img src="/profileimg.png" alt="" />
         <div>
@@ -10,7 +10,7 @@ export default function Message({ active }) {
           <p className={styles.username}>@exampleuser</p>
         </div>
       </div>
-      <p>Sure thing im hopping on to manchester right now, best believe </p>
+      <p>{chat}</p>
     </div>
   )
 }

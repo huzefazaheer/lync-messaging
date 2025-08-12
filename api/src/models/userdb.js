@@ -17,7 +17,7 @@ async function getUserByUsername(username) {
 
 async function getUserBySearch(name) {
   const user =
-    await prisma.$queryRaw`SELECT id, username, display_name FROM "User" WHERE 'username' LIKE ${`%${name}%`};`
+    await prisma.$queryRaw`SELECT id, username, display_name FROM "User" WHERE username LIKE ${`%${name}%`};`
 
   return user
 }

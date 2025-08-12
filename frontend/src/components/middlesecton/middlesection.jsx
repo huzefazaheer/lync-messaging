@@ -4,9 +4,11 @@ import UserStatus from '../../components/userstatus/userstatus'
 import Message from '../../components/message/message'
 import { useContext, useEffect, useState } from 'react'
 import { appContext } from '../../App'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 export default function MiddleSec() {
   const { user } = useContext(appContext)
+  const [loading, setLoading] = useState(true)
   const [chats, setChats] = useState([])
   const [search, setSearch] = useState('')
   const [searchUsers, setSearchUsers] = useState([])
@@ -16,14 +18,15 @@ export default function MiddleSec() {
   }, [])
 
   async function getChats() {
+    setLoading(true)
     const response = await fetch('http://localhost:8080/chats', {
       method: 'GET',
 
       credentials: 'include',
     })
     const data = await response.json()
-    console.log(data)
-    setChats(data)
+    setChats(data.chats)
+    setLoading(false)
   }
 
   async function getUsers() {
@@ -39,20 +42,21 @@ export default function MiddleSec() {
     setSearchUsers(data)
   }
 
-  const chatsjsx =
-    chats.length > 0
-      ? chats.map((chat) => {
-          return <Message />
-        })
-      : ''
+  const chatsjsx = !loading ? (
+    chats.map((chat) => <Message />)
+  ) : (
+    <p>You don't have any chats yet</p>
+  )
 
   const searchusers =
     searchUsers.length > 0
       ? searchUsers.map((user) => {
           return (
             <UserCard
+              id={user.id}
               display_name={user.display_name}
               username={user.username}
+              setSearch={setSearch}
             />
           )
         })
@@ -94,13 +98,44 @@ export default function MiddleSec() {
   )
 }
 
-function UserCard({ display_name, username, profile_picture }) {
+function UserCard({ id, display_name, username, profile_picture, setSearch }) {
+  const navigate = useNavigate()
+
+  async function createNewChat() {
+    const response = await fetch('http://localhost:8080/chats', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        users: [id],
+      }),
+    })
+    const data = await response.json()
+    console.log(data)
+    navigate('/')
+  }
+
   return (
-    <div className={styles.usercard}>
-      <img src={profile_picture ? profile_picture : '/profileimg.png'} alt="" />
+    <div className={styles.usercard} key={id}>
+      <img
+        className={styles.profile}
+        src={profile_picture ? profile_picture : '/profileimg.png'}
+        alt=""
+      />
       <div>
         <p className={styles.displayname}>{display_name}</p>
         <p className={styles.username}>@{username}</p>
+      </div>
+      <div className={styles.iconholder}>
+        {/* <img className={styles.icon} src={'/addqueue.svg'} alt="" /> */}
+        <img
+          className={styles.icon}
+          src={'/sendmessage.svg'}
+          alt=""
+          onClick={createNewChat}
+        />
       </div>
     </div>
   )

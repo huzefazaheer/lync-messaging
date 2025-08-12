@@ -12,9 +12,9 @@ async function getChatById(id) {
 
 async function createChat(userId, users) {
   const ids = [userId, ...users]
-
+  let chat
   if (ids.length > 2) {
-    const chat = await prisma.chat.create({
+    chat = await prisma.chat.create({
       data: {
         chat_users: {
           connect: ids.map((id) => ({ id })),
@@ -23,7 +23,7 @@ async function createChat(userId, users) {
       },
     })
   } else {
-    const chat = await prisma.chat.create({
+    chat = await prisma.chat.create({
       data: {
         chat_users: {
           connect: ids.map((id) => ({ id })),
