@@ -1,4 +1,9 @@
-const { getAllChats, getChatById, createChat } = require('../models/chatsdb')
+const {
+  getAllChats,
+  getChatById,
+  createChat,
+  getChatByUsers,
+} = require('../models/chatsdb')
 const { getUserChats } = require('../models/userdb')
 
 async function getAllChatsController(req, res) {
@@ -26,9 +31,13 @@ async function getChatController(req, res) {
 
 async function createChatController(req, res) {
   try {
-    const userIds = JSON.parse(req.body.users)
-    const chat = await createChat(req.user.id, userIds)
-    res.json(chat)
+    const userIds = req.body.users
+    const userIds_ = [...userIds, req.user.id]
+    const chatExists = getChatByUsers(userIds_)
+    if (!chatExists) {
+      const chat = await createChat(req.user.id, userIds)
+      res.json(chat)
+    } else res.json({ error: 'Chat already exists' })
   } catch (error) {
     console.log(error)
     res.status(500).json({ error: 'Internal Database Error' })

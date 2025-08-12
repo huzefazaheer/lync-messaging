@@ -33,7 +33,15 @@ async function getUserFriends(id) {
 async function getUserChats(id) {
   const userFriends = await prisma.user.findUnique({
     where: { id: id },
-    select: { chats: { select: { id: true, chat_type: true } } },
+    select: {
+      chats: {
+        select: {
+          id: true,
+          chat_type: true,
+          chat_users: { select: { username: true } },
+        },
+      },
+    },
   })
   return userFriends
 }
