@@ -17,6 +17,7 @@ authRouter.post('/login', (req, res, next) => {
         return res.status(500).json({ error: 'Could not log in user' })
       }
       const sendUser = {
+        id: req.user.id,
         display_name: req.user.display_name,
         username: req.user.username,
         about: req.user.about,
@@ -34,6 +35,7 @@ authRouter.post('/signup', signupController)
 authRouter.get('/isloggedin', (req, res) => {
   if (req.user) {
     const sendUser = {
+      id: req.user.id,
       display_name: req.user.display_name,
       username: req.user.username,
       about: req.user.about,

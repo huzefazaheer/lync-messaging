@@ -10,7 +10,7 @@ async function getAllChats() {
 async function getChatById(id) {
   const chat = await prisma.chat.findUnique({
     where: { id: id },
-    include: { chat_users: { select: { username: true } } },
+    include: { messages: true },
   })
   return chat
 }

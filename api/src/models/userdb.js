@@ -38,7 +38,7 @@ async function getUserChats(id) {
         select: {
           id: true,
           chat_type: true,
-          chat_users: { select: { username: true } },
+          chat_users: { select: { username: true, display_name: true } },
         },
       },
     },

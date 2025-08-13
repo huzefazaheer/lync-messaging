@@ -43,7 +43,9 @@ export default function MiddleSec() {
   }
 
   const chatsjsx = !loading ? (
-    chats.map((chat) => <Message />)
+    chats.map((chat) => {
+      return <Message id={chat.id} users={chat.chat_users} />
+    })
   ) : (
     <p>You don't have any chats yet</p>
   )
@@ -98,7 +100,7 @@ export default function MiddleSec() {
   )
 }
 
-function UserCard({ id, display_name, username, profile_picture, setSearch }) {
+function UserCard({ id, display_name, username, profile_picture }) {
   const navigate = useNavigate()
 
   async function createNewChat() {
@@ -113,7 +115,6 @@ function UserCard({ id, display_name, username, profile_picture, setSearch }) {
       }),
     })
     const data = await response.json()
-    console.log(data)
     navigate('/')
   }
 

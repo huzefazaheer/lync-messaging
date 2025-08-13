@@ -8,7 +8,14 @@ import { createContext } from 'react'
 import Profile from './pages/profilepage/profile'
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const appContext = createContext({ user: null, setUser: null })
+export const appContext = createContext({
+  user: null,
+  setUser: null,
+  activeChatId: null,
+  setActiveChatId: null,
+  activeChatUser: null,
+  setActiveChatUser: null,
+})
 
 function App() {
   const app = useData()

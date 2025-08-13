@@ -31,10 +31,12 @@ async function getChatController(req, res) {
 
 async function createChatController(req, res) {
   try {
+    if (req.user.id in req.body.users)
+      res.json({ error: 'Can not make chat with yourself' })
     const userIds = req.body.users
     const userIds_ = [...userIds, req.user.id]
-    const chatExists = getChatByUsers(userIds_)
-    if (!chatExists) {
+    const chatExists = await getChatByUsers(userIds_)
+    if (chatExists == null) {
       const chat = await createChat(req.user.id, userIds)
       res.json(chat)
     } else res.json({ error: 'Chat already exists' })
