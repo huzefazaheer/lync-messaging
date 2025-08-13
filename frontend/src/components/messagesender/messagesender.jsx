@@ -2,11 +2,18 @@ import styles from './messagesender.module.css'
 import { useContext, useState } from 'react'
 import { appContext } from '../../App'
 
-export default function MessageSender({ setChange }) {
+export default function MessageSender({ setChange, setMessages }) {
   const { user, activeChatId } = useContext(appContext)
   const [text, setText] = useState('')
 
   async function sendChatMessage() {
+    setMessages((messages) => [
+      ...messages,
+      {
+        text: text,
+        authorId: user.id,
+      },
+    ])
     await fetch('http://localhost:8080/messages', {
       method: 'POST',
       headers: {

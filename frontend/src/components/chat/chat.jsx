@@ -10,13 +10,11 @@ export default function Chat() {
   const { activeChatId, user, activeChatUser } = useContext(appContext)
   const [messages, setMessages] = useState([])
 
-  const [change, setChange] = useState(false)
-
   useEffect(() => {
     if (activeChatId != '') {
       getChatData()
     }
-  }, [activeChatId, change])
+  }, [activeChatId])
 
   if (user == null) return
 
@@ -36,6 +34,7 @@ export default function Chat() {
   const messagesjsx =
     messages.length > 0
       ? messages.map((msg) => {
+          console.log(msg)
           return <ChatMessage msg={msg.text} isSent={msg.authorId == user.id} />
         })
       : 'Nothing to see here '
@@ -60,7 +59,7 @@ export default function Chat() {
 
       <div className={styles.msgs}>{messagesjsx}</div>
 
-      <MessageSender setChange={setChange} />
+      <MessageSender setMessages={setMessages} />
     </div>
   )
 }
