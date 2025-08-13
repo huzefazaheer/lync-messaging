@@ -17,7 +17,6 @@ export default function Home() {
       credentials: 'include',
     })
     const data = await response.json()
-    console.log(data)
     if (data.error) {
       navigate('/login')
     } else {
@@ -30,6 +29,8 @@ export default function Home() {
       getUserSession()
     }
   }, [])
+
+  if (app.user == null) return
 
   return (
     <div className={styles.home}>

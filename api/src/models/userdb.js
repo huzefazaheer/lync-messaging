@@ -64,7 +64,7 @@ async function addUserFriend(userId, friendId) {
   return user
 }
 
-async function updateUser(display_name, profile_photo, desc) {
+async function updateUser(userId, display_name, profile_photo, desc) {
   const user = await prisma.user.update({
     where: { id: userId },
     data: {

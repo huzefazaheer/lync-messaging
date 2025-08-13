@@ -65,13 +65,17 @@
   margin-top: 20px;
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 5px;
   align-items: center;
 }
 
 .profile form button img {
   width: 20px;
   height: 20px;
+}
+
+.profile form p {
+  margin: 10px;
 }
 
 .half {
@@ -90,4 +94,8 @@
   width: 100%;
   gap: 20px;
   align-items: center;
+}
+
+.username::before {
+  content: '@';
 }

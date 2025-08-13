@@ -10,4 +10,19 @@ async function createUser(display_name, username, password) {
   })
 }
 
-module.exports = { createUser }
+async function getOldPassword(id) {
+  const user = await prisma.user.findUnique({
+    where: { id: id },
+  })
+  return user
+}
+
+async function updateUserPassword(id, newpass) {
+  const user = await prisma.user.update({
+    where: { id: id },
+    data: { password: newpass },
+  })
+  return user
+}
+
+module.exports = { createUser, getOldPassword, updateUserPassword }

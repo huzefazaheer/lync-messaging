@@ -59,14 +59,20 @@ async function updateUserController(req, res) {
   if (
     req.body &&
     req.body.display_name &&
-    req.body.profile_picture &&
+    req.body.profile_photo &&
     req.body.about
   ) {
-    const user = await updateUser(
-      req.body.display_name,
-      req.body.profile_picture,
-      req.body.about,
-    )
+    try {
+      const user = await updateUser(
+        req.user.id,
+        req.body.display_name,
+        req.body.profile_photo,
+        req.body.about,
+      )
+      res.json({ success: 'Updates saved', user })
+    } catch (error) {
+      res.status(500).res({ error: 'Internal database error' })
+    }
   } else res.status(403).json({ error: 'Invalid data' })
 }
 

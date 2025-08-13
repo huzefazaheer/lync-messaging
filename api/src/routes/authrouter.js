@@ -4,6 +4,8 @@ const passport = require('passport')
 const {
   signupController,
   isLoggedIn,
+  updatePasswordController,
+  isAuth,
 } = require('../controllers/authcontroller')
 
 const authRouter = Router()
@@ -35,5 +37,7 @@ authRouter.post('/login', (req, res, next) => {
 authRouter.post('/signup', signupController)
 
 authRouter.get('/isloggedin', isLoggedIn)
+
+authRouter.put('/update', isAuth, updatePasswordController)
 
 module.exports = { authRouter }
