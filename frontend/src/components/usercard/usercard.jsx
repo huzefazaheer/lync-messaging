@@ -18,7 +18,11 @@ export default function UserCard() {
   return (
     <div className={styles.usercard}>
       <img
-        src={user?.photo ? user.photo : 'https://avatar.iran.liara.run/public'}
+        src={
+          user?.photo
+            ? user.photo
+            : `https://avatar.iran.liara.run/public?username=${user.username}`
+        }
         alt=""
       />
 

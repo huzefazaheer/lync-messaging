@@ -118,7 +118,11 @@ function UserCard({
     <div className={styles.usercard} key={id}>
       <img
         className={styles.profile}
-        src={profile_picture ? profile_picture : '/profileimg.png'}
+        src={
+          profile_picture
+            ? profile_picture
+            : `https://avatar.iran.liara.run/public?username=${username}`
+        }
         alt=""
       />
       <div>
