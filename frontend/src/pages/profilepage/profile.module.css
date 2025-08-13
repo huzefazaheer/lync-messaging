@@ -3,3 +3,91 @@
   flex-direction: row;
   overflow-x: hidden;
 }
+
+.rest {
+  flex-grow: 2;
+  margin-top: 20px;
+}
+
+.profile {
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.profile h2 {
+  font-size: 20px;
+  color: #4d4d4d;
+}
+
+.profile h3 {
+  font-size: 18px;
+  color: #4d4d4d;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.profile form {
+  border: 1px solid #b3b3b3;
+  border-radius: 9px;
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+  flex-wrap: wrap;
+}
+
+.profile form:last-of-type {
+  margin-bottom: 60px;
+}
+
+.profile form label {
+  font-size: 14px;
+  color: #1a1a1a;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.profile form input {
+  height: 30px;
+  border-radius: 9px;
+  border: 1px solid #b3b3b3;
+  padding-left: 6px;
+}
+
+.profile form button {
+  width: auto;
+  margin-left: auto;
+  background-color: var(--color-accent);
+  color: white;
+  border: none;
+  padding: 0px 15px;
+  border-radius: 9px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+}
+
+.profile form button img {
+  width: 20px;
+  height: 20px;
+}
+
+.half {
+  /* width: 50%; */
+}
+
+.vert {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.hor {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 20px;
+  align-items: center;
+}
