@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 import styles from './styles.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { appContext } from '../../App'
+import useFetch from '../../utils/useFetch'
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false)
@@ -10,10 +11,14 @@ export default function Login() {
   const [error, setError] = useState('')
 
   const app = useContext(appContext)
-
+  const loginFetch = useFetch('login', 'POST', {
+    username: username,
+    password: password,
+  })
   const navigate = useNavigate()
 
-  function handleLogin() {
+  function handleLogin(e) {
+    e.preventDefault()
     if (username == '') {
       setError('Please provide your username')
       return
@@ -32,23 +37,11 @@ export default function Login() {
 
   async function sendData() {
     if (username == '' || password == '') return
-    const response = await fetch('http://localhost:8080/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-      body: JSON.stringify({
-        username: username,
-        password: password,
-      }),
-    })
-    const data = await response.json()
-    console.log(data)
+    const data = await loginFetch.fetchData()
     if (data.error) {
       setError('Invalid username or password')
     } else {
-      app.setUser(data.user)
+      app.setUser(loginFetch.data.user)
       navigate('/')
     }
   }
@@ -56,7 +49,7 @@ export default function Login() {
   return (
     <>
       <img className={styles.logo} src="/logo.svg" alt="Lync messaging logo" />
-      <div className={styles.authform}>
+      <form className={styles.authform}>
         <h1>Login to Lync</h1>
         <label htmlFor="username">Username</label>
         <input
@@ -76,19 +69,30 @@ export default function Login() {
         <p className={`${styles.error} ${error != '' ? '' : styles.hidden}`}>
           {error}
         </p>
-        <button type="submit" onClick={handleLogin}>
-          {showPassword ? 'Login' : 'Continue'}
-        </button>
-        <button type="submit" className={styles.secondary}>
-          Continue as Guest
-        </button>
+        {!loginFetch.loading ? (
+          <>
+            {' '}
+            <button type="submit" onClick={(e) => handleLogin(e)}>
+              {showPassword
+                ? loginFetch.loading
+                  ? 'Logging in'
+                  : 'Login'
+                : 'Continue'}
+            </button>
+            <button type="submit" className={styles.secondary}>
+              Continue as Guest
+            </button>
+          </>
+        ) : (
+          <img className={styles.load} src="loading.gif" alt="" />
+        )}
         <p>
           Don't have an account?{' '}
           <span className={styles.link}>
             <Link to={'/signup'}>Sign Up</Link>
           </span>
         </p>
-      </div>
+      </form>
     </>
   )
 }

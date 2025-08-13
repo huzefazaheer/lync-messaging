@@ -109,3 +109,9 @@
   font-size: 12px;
   width: fit-content;
 }
+
+.load {
+  width: 20%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

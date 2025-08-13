@@ -3,6 +3,7 @@ import styles from './styles.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 import checkPassword from '../../utils/checkPassword'
 import { appContext } from '../../App'
+import useFetch from '../../utils/useFetch'
 
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false)
@@ -12,10 +13,19 @@ export default function SignUp() {
   const [error, setError] = useState('')
 
   const app = useContext(appContext)
-
+  const signupFetch = useFetch('signup', 'POST', {
+    username: username,
+    password: password,
+    display_name: username,
+  })
+  const loginFetch = useFetch('login', 'POST', {
+    username: username,
+    password: password,
+  })
   const navigate = useNavigate()
 
-  function handleSignup() {
+  function handleSignup(e) {
+    e.preventDefault()
     if (username == '') {
       setError('Please choose a username')
       return
@@ -43,34 +53,12 @@ export default function SignUp() {
 
   async function sendRequest() {
     if (username == '' || password == '') return
-    const response = await fetch('http://localhost:8080/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-      body: JSON.stringify({
-        username: username,
-        password: password,
-        display_name: username,
-      }),
-    })
-    const data = await response.json()
+
+    const data = await signupFetch.fetchData()
     if (data.error) {
       setError('Username already exists')
     } else {
-      const response = await fetch('http://localhost:8080/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-        body: JSON.stringify({
-          username: username,
-          password: password,
-        }),
-      })
-      const data = await response.json()
+      const data = loginFetch.fetchData()
       app.setUser(data.user)
       navigate('/')
     }
@@ -78,9 +66,8 @@ export default function SignUp() {
 
   return (
     <>
-      {' '}
       <img className={styles.logo} src="/logo.svg" alt="Lync messaging logo" />
-      <div className={styles.authform}>
+      <form className={styles.authform}>
         <h1>Welcome to Lync</h1>
         <label htmlFor="username">Username</label>
         <input
@@ -109,19 +96,25 @@ export default function SignUp() {
         <p className={`${styles.error} ${error != '' ? '' : styles.hidden}`}>
           {error}
         </p>
-        <button type="submit" onClick={handleSignup}>
-          {showPassword ? 'Sign Up' : 'Continue'}
-        </button>
-        <button type="submit" className={styles.secondary}>
-          Continue as Guest
-        </button>
+        {!loginFetch.loading && !signupFetch.loading ? (
+          <>
+            <button type="submit" onClick={(e) => handleSignup(e)}>
+              {showPassword ? 'Sign Up' : 'Continue'}
+            </button>
+            <button type="submit" className={styles.secondary}>
+              Continue as Guest
+            </button>
+          </>
+        ) : (
+          <img className={styles.load} src="loading.gif" alt="" />
+        )}
         <p>
           Already have an account?{' '}
           <span className={styles.link}>
             <Link to={'/login'}>Login</Link>
           </span>
         </p>
-      </div>
+      </form>
     </>
   )
 }

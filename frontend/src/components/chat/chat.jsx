@@ -13,7 +13,6 @@ export default function Chat() {
   const [change, setChange] = useState(false)
 
   useEffect(() => {
-    console.log(activeChatUser)
     if (activeChatId != '') {
       getChatData()
     }

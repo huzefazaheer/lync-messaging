@@ -2,29 +2,24 @@ import styles from './styles.module.css'
 
 import Message from '../../components/message/message'
 import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import useFetch from '../../utils/useFetch'
 
 export default function MiddleSec() {
-  const [loading, setLoading] = useState(true)
   const [chats, setChats] = useState([])
   const [search, setSearch] = useState('')
   const [searchUsers, setSearchUsers] = useState([])
 
+  const chatsFetch = useFetch('chats', 'GET')
+
   useEffect(() => {
-    getChats()
+    chatsFetch.fetchData()
   }, [])
 
-  async function getChats() {
-    setLoading(true)
-    const response = await fetch('http://localhost:8080/chats', {
-      method: 'GET',
-
-      credentials: 'include',
-    })
-    const data = await response.json()
-    setChats(data.chats)
-    setLoading(false)
-  }
+  useEffect(() => {
+    if (!chatsFetch.loading && chatsFetch.data) {
+      setChats(chatsFetch.data.chats)
+    }
+  }, [chatsFetch.loading, chatsFetch.data])
 
   async function getUsers() {
     if (search == '') {
@@ -40,7 +35,7 @@ export default function MiddleSec() {
   }
 
   const chatsjsx =
-    !loading && chats?.length > 0 ? (
+    chats?.length > 0 ? (
       chats.map((chat) => {
         return <Message id={chat.id} users={chat.chat_users} />
       })
@@ -57,6 +52,7 @@ export default function MiddleSec() {
               display_name={user.display_name}
               username={user.username}
               setSearch={setSearch}
+              chatsFetch={chatsFetch}
             />
           )
         })
@@ -98,22 +94,24 @@ export default function MiddleSec() {
   )
 }
 
-function UserCard({ id, display_name, username, profile_picture }) {
-  const navigate = useNavigate()
+function UserCard({
+  id,
+  display_name,
+  username,
+  profile_picture,
+  chatsFetch,
+  setSearch,
+}) {
+  const newChatFetch = useFetch('chats', 'POST', {
+    users: [id],
+  })
 
+  //Sometimes says chat exists eve though it dose not
   async function createNewChat() {
-    const response = await fetch('http://localhost:8080/chats', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      credentials: 'include',
-      body: JSON.stringify({
-        users: [id],
-      }),
-    })
-    const data = await response.json()
-    navigate('/')
+    //Add validation or response to adding new chat
+    const data = await newChatFetch.fetchData()
+    if (!data.error) chatsFetch.fetchData()
+    setSearch('')
   }
 
   return (
