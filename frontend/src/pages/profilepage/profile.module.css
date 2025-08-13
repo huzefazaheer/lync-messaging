@@ -1,7 +1,7 @@
-.home {
+.body {
   display: flex;
   flex-direction: row;
-  overflow-x: hidden;
+  overflow-y: none;
 }
 
 .rest {
@@ -12,6 +12,8 @@
 .profile {
   margin-left: 40px;
   margin-right: 40px;
+  overflow-y: auto;
+  height: 86vh;
 }
 
 .profile h2 {

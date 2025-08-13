@@ -31,3 +31,7 @@
   height: 22px !important;
   margin-left: 15px;
 }
+
+.logout:hover {
+  transform: scale(1.1);
+}

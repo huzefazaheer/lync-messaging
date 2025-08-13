@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import styles from './message.module.css'
 import { appContext } from '../../App'
 
-export default function Message({ id, active, chat, users }) {
+export default function Message({ id, chat, users }) {
   const app = useContext(appContext)
 
   if (app.user == null) return
@@ -23,7 +23,7 @@ export default function Message({ id, active, chat, users }) {
     <div
       onClick={setActiveChat}
       key={id}
-      className={`${styles.msg} ${active ? styles.active : ''}`}
+      className={`${styles.msg} ${app.activeChatId == id ? styles.active : ''}`}
     >
       <div className={styles.usercard}>
         <img src={imgsrc} alt="" />

@@ -2,7 +2,9 @@
   border-radius: 9px;
   display: flex;
   align-items: center;
+  justify-items: center;
   gap: 20px;
+  cursor: default;
 }
 
 .usercard img {
@@ -22,15 +24,20 @@
 
 .msg {
   width: 280px;
-  padding: 20px;
+  padding: 15px;
   border-radius: 9px;
+  margin-top: 5px;
+  transition: transform 100ms ease;
+  display: flex;
 }
 
-.msg p {
-  /* color: #686767;
-  font-size: 14px; */
+.msg:hover {
+  background-color: #f4f4f4a4;
 }
 
 .active {
-  background-color: #f8f8f8;
+  border: 1px solid var(--color-border);
+  background-color: #f4f4f4;
+  border-radius: 18px;
+  transform: scale(1.05);
 }

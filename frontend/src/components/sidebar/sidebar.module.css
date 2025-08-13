@@ -18,6 +18,12 @@
   font-size: 20px;
   font-weight: 700;
   color: #1a1a1a;
+  transition: transform 100ms ease;
+}
+
+.menuitem p:hover {
+  color: #3a3939;
+  transform: translateY(-2px);
 }
 
 .menuitem {

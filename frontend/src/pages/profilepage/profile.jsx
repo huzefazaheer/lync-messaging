@@ -47,7 +47,7 @@ export default function Profile() {
   }
 
   return (
-    <div className={styles.home}>
+    <div className={styles.body}>
       <Sidebar />
       <div className={styles.rest}>
         <UserTop />
