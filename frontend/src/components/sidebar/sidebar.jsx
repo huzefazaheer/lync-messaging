@@ -1,10 +1,10 @@
 import { useContext } from 'react'
 import styles from './sidebar.module.css'
 import { appContext } from '../../App'
+import { useNavigate } from 'react-router-dom'
+import UserCard from '../usercard/usercard'
 
 export default function Sidebar() {
-  const { user } = useContext(appContext)
-
   return (
     <>
       <div className={styles.sidebar}>
@@ -12,52 +12,62 @@ export default function Sidebar() {
           <img src="/logo.svg" alt="" />
           <p>Lync Messaging</p>
         </div>
+
         <div className={styles.menu}>
           <div>
-            <div className={styles.menuitem}>
-              <img src="/home.svg" alt="" />
-              <p>Home</p>
-            </div>
-            <div className={styles.menuitem}>
-              <img src="/friends.svg" alt="" />
-              <p>Friends</p>
-            </div>
-            <div className={styles.menuitem}>
-              <img src="/profile.svg" alt="" />
-              <p>Profile</p>
-            </div>
+            <MenuItem id={0} src={'/home.svg'} text={'Home'} url={'/'} />
+            <MenuItem
+              id={1}
+              src={'/profile.svg'}
+              text={'Profile'}
+              url={'/profile'}
+            />
+            <MenuItem
+              id={2}
+              src={'/friends.svg'}
+              text={'Friends'}
+              url={'/friends'}
+            />
           </div>
 
           <div>
-            <div className={styles.menuitem}>
-              <img src="/notifications.svg" alt="" />
-              <p>Notifications</p>
-            </div>
-            <div className={styles.menuitem}>
-              <img src="/settings.svg" alt="" />
-              <p>Settings</p>
-            </div>
+            <MenuItem
+              id={3}
+              src={'/notifications.svg'}
+              text={'Notifications'}
+              url={'/'}
+            />
+            <MenuItem
+              id={4}
+              src={'/settings.svg'}
+              text={'Settings'}
+              url={'/'}
+            />
           </div>
         </div>
 
-        <div className={styles.usercard}>
-          <img
-            src={
-              user?.profile_picture ? user.profile_picture : '/profileimg.png'
-            }
-            alt=""
-          />
-          <div>
-            <p className={styles.displayname}>
-              {user?.display_name ? user.display_name : ''}
-            </p>
-            <p className={styles.username}>
-              @{user?.username ? user.username : ''}
-            </p>
-          </div>
-          <img className={styles.logout} src="/logout.svg" alt="" />
-        </div>
+        <UserCard />
       </div>
     </>
+  )
+}
+
+function MenuItem({ id, src, text, url }) {
+  const { setActivePageIndex, activePageIndex } = useContext(appContext)
+  const navigate = useNavigate()
+
+  return (
+    <div
+      className={`${styles.menuitem} ${
+        activePageIndex === id ? styles.active : ''
+      }`}
+      onClick={() => {
+        setActivePageIndex(id)
+        navigate(url)
+      }}
+    >
+      <img src={src} alt="" />
+      <p>{text}</p>
+    </div>
   )
 }

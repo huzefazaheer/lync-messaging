@@ -25,4 +25,17 @@ async function isAdmin(req, res, next) {
   else res.status(401).json({ error: 'Unauthorised' })
 }
 
-module.exports = { signupController, isAuth, isAdmin }
+async function isLoggedIn(req, res) {
+  if (req.user) {
+    const sendUser = {
+      id: req.user.id,
+      display_name: req.user.display_name,
+      username: req.user.username,
+      about: req.user.about,
+      photo: req.user.profile_photo,
+    }
+    res.status(200).json({ success: 'Logged in', user: sendUser })
+  } else res.status(401).json({ error: 'Not authorized' })
+}
+
+module.exports = { signupController, isAuth, isAdmin, isLoggedIn }

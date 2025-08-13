@@ -1,5 +1,4 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import './App.css'
 import Login from './components/auth/login'
 import SignUp from './components/auth/signup'
 import Home from './pages/homepage/homepage'
@@ -15,6 +14,8 @@ export const appContext = createContext({
   setActiveChatId: null,
   activeChatUser: null,
   setActiveChatUser: null,
+  activePageIndex: null,
+  setActivePageIndex: null,
 })
 
 function App() {

@@ -6,7 +6,16 @@ async function getAllUsers() {
 }
 
 async function getUserById(id) {
-  const user = await prisma.user.findUnique({ where: { id: id } })
+  const user = await prisma.user.findUnique({
+    where: { id: id },
+    select: {
+      id: true,
+      username: true,
+      display_name: true,
+      profile_photo: true,
+      about: true,
+    },
+  })
   return user
 }
 
@@ -55,6 +64,18 @@ async function addUserFriend(userId, friendId) {
   return user
 }
 
+async function updateUser(display_name, profile_photo, desc) {
+  const user = await prisma.user.update({
+    where: { id: userId },
+    data: {
+      display_name: display_name,
+      profile_photo: profile_photo,
+      about: desc,
+    },
+  })
+  return user
+}
+
 module.exports = {
   getAllUsers,
   getUserById,
@@ -63,4 +84,5 @@ module.exports = {
   addUserFriend,
   getUserChats,
   getUserBySearch,
+  updateUser,
 }

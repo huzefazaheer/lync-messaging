@@ -1,0 +1,70 @@
+.sendmsg {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  min-height: 90px;
+  margin-left: 20px;
+  margin-right: 20px;
+  border: 1px solid black;
+  border-radius: 9px;
+  position: relative;
+}
+
+.sendmsg textarea {
+  border: none;
+  flex-grow: 2;
+  resize: none;
+  font-family: Helvetica, sans-serif;
+  font-size: 14px;
+  color: #555555;
+}
+
+.sendmsg textarea:focus,
+.sendmsg textarea:hover {
+  border: none;
+  outline: none;
+}
+
+.sendmsg img {
+  height: 24px;
+  width: 24px;
+}
+
+.control {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  gap: 10px;
+  align-items: center;
+}
+
+.control button {
+  padding: 8px 20px;
+  border-radius: 9px;
+  color: white;
+  background-color: var(--color-accent);
+  border: none;
+}
+
+.control button:hover {
+  background-color: var(--button-hover);
+}
+
+.control button:active {
+  background-color: var(--button-active);
+}
+
+.msghint {
+  position: absolute;
+  font-size: 14px;
+  background-color: white;
+  top: -8px;
+  left: 10px;
+  padding-left: 2px;
+  padding-right: 2px;
+  margin: 0;
+}
+
+.hidden {
+  display: none;
+}

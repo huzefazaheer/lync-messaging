@@ -5,6 +5,7 @@ const {
   getUserChats,
   getUserByUsername,
   getUserBySearch,
+  updateUser,
 } = require('../models/userdb')
 
 async function getUserController(req, res) {
@@ -54,10 +55,26 @@ async function getUserChatsController(req, res) {
   }
 }
 
+async function updateUserController(req, res) {
+  if (
+    req.body &&
+    req.body.display_name &&
+    req.body.profile_picture &&
+    req.body.about
+  ) {
+    const user = await updateUser(
+      req.body.display_name,
+      req.body.profile_picture,
+      req.body.about,
+    )
+  } else res.status(403).json({ error: 'Invalid data' })
+}
+
 module.exports = {
   getAllUsersController,
   getUserController,
   addFriendController,
   getUserChatsController,
   getUserByUsernameController,
+  updateUserController,
 }

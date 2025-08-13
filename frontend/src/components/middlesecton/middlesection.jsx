@@ -1,13 +1,10 @@
 import styles from './styles.module.css'
 
-import UserStatus from '../../components/userstatus/userstatus'
 import Message from '../../components/message/message'
-import { useContext, useEffect, useState } from 'react'
-import { appContext } from '../../App'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export default function MiddleSec() {
-  const { user } = useContext(appContext)
   const [loading, setLoading] = useState(true)
   const [chats, setChats] = useState([])
   const [search, setSearch] = useState('')
@@ -42,13 +39,14 @@ export default function MiddleSec() {
     setSearchUsers(data)
   }
 
-  const chatsjsx = !loading ? (
-    chats.map((chat) => {
-      return <Message id={chat.id} users={chat.chat_users} />
-    })
-  ) : (
-    <p>You don't have any chats yet</p>
-  )
+  const chatsjsx =
+    !loading && chats?.length > 0 ? (
+      chats.map((chat) => {
+        return <Message id={chat.id} users={chat.chat_users} />
+      })
+    ) : (
+      <p>You don't have any chats yet</p>
+    )
 
   const searchusers =
     searchUsers.length > 0

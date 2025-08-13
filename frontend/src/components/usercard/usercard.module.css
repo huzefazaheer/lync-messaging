@@ -1,8 +1,13 @@
 .usercard {
+  margin-left: 20px;
+  margin-top: 40px;
+  width: 90%;
+  background-color: #f4f6f7;
   border-radius: 9px;
   display: flex;
   align-items: center;
   gap: 20px;
+  padding: 20px;
 }
 
 .usercard img {
@@ -20,17 +25,8 @@
   margin: 0;
 }
 
-.msg {
-  width: 280px;
-  padding: 20px;
-  border-radius: 9px;
-}
-
-.msg p {
-  /* color: #686767;
-  font-size: 14px; */
-}
-
-.active {
-  background-color: #f8f8f8;
+.logout {
+  width: 22px !important;
+  height: 22px !important;
+  margin-left: 15px;
 }

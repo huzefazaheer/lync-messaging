@@ -5,6 +5,7 @@ const {
   addFriendController,
   getUserChatsController,
   getUserByUsernameController,
+  updateUserController,
 } = require('../controllers/usercontroller')
 const { isAuth, isAdmin } = require('../controllers/authcontroller')
 
@@ -19,5 +20,7 @@ userRouter.get('/:id', isAuth, getUserController)
 userRouter.get('/:id/chats', isAuth, getUserChatsController)
 
 userRouter.put('/add_friend/:id', isAuth, addFriendController)
+
+userRouter.put('/', isAuth, updateUserController)
 
 module.exports = { userRouter }

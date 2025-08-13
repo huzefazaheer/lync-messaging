@@ -1,8 +1,14 @@
+.top {
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 20px;
+}
+
 .usercard {
   border-radius: 9px;
   display: flex;
   align-items: center;
   gap: 20px;
+  margin-left: 40px;
 }
 
 .usercard img {
@@ -18,19 +24,4 @@
 .username {
   color: #494a4a;
   margin: 0;
-}
-
-.msg {
-  width: 280px;
-  padding: 20px;
-  border-radius: 9px;
-}
-
-.msg p {
-  /* color: #686767;
-  font-size: 14px; */
-}
-
-.active {
-  background-color: #f8f8f8;
 }

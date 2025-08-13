@@ -4,8 +4,6 @@ import { Link, useNavigate } from 'react-router-dom'
 import checkPassword from '../../utils/checkPassword'
 import { appContext } from '../../App'
 
-//TODO add user response on signup
-
 export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false)
   const [username, setUsername] = useState('')

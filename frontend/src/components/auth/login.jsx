@@ -3,8 +3,6 @@ import styles from './styles.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { appContext } from '../../App'
 
-//TODO: add session login
-
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false)
   const [username, setUsername] = useState('')

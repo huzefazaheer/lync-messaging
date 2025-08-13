@@ -7,13 +7,16 @@ export default function Message({ id, active, chat, users }) {
 
   if (app.user == null) return
 
+  //Get name of other user
   const displayUser = users.filter(
     (user) => user.username != app.user.username,
   )[0]
+
   function setActiveChat() {
     app.setActiveChatId(id)
     app.setActiveChatUser(displayUser)
   }
+
   return (
     <div
       onClick={setActiveChat}
