@@ -12,7 +12,8 @@ async function signupController(req, res) {
   const display_name = req.body.display_name
   const hashedPassword = await bcrypt.hash(password, 10)
   try {
-    const user = await createUser(display_name, username, hashedPassword)
+    const photo = `https://avatar.iran.liara.run/public?username=${username}`
+    const user = await createUser(display_name, username, hashedPassword, photo)
     res.status(200).json({ success: 'Success' })
   } catch (error) {
     console.log(error)

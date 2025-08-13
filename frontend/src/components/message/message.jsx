@@ -17,6 +17,8 @@ export default function Message({ id, active, chat, users }) {
     app.setActiveChatUser(displayUser)
   }
 
+  const imgsrc = `https://avatar.iran.liara.run/public?username=${displayUser.username}`
+
   return (
     <div
       onClick={setActiveChat}
@@ -24,11 +26,11 @@ export default function Message({ id, active, chat, users }) {
       className={`${styles.msg} ${active ? styles.active : ''}`}
     >
       <div className={styles.usercard}>
-        <img src="/profileimg.png" alt="" />
+        <img src={imgsrc} alt="" />
         <div>
           <p className={styles.displayname}>{displayUser?.display_name}</p>
           <p className={styles.username}>
-            {displayUser?.username ? '@ ' + displayUser.username : ''}
+            {displayUser?.username ? '@' + displayUser.username : ''}
           </p>
         </div>
       </div>

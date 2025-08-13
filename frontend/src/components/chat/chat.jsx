@@ -34,7 +34,6 @@ export default function Chat() {
   const messagesjsx =
     messages.length > 0
       ? messages.map((msg) => {
-          console.log(msg)
           return <ChatMessage msg={msg.text} isSent={msg.authorId == user.id} />
         })
       : 'Nothing to see here '
@@ -43,9 +42,11 @@ export default function Chat() {
     <div className={styles.chat}>
       <UserTop
         img={
-          activeChatUser?.profile_picture
-            ? activeChatUser.profile_picture
-            : '/profileimg.png'
+          activeChatUser?.username
+            ? `https://avatar.iran.liara.run/public?username=${activeChatUser.username}`
+            : user?.photo
+            ? user.photo
+            : `https://avatar.iran.liara.run/public?username=${user.username}`
         }
         username={
           activeChatUser?.username ? activeChatUser.display_name : user.username

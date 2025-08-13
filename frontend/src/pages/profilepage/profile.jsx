@@ -13,7 +13,7 @@ export default function Profile() {
     username: '',
     display_name: '',
     about: '',
-    photo: '',
+    profile_photo: '',
   })
   const [password, setPassword] = useState({ oldpassword: '', newpassword: '' })
 

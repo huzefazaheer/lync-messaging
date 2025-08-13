@@ -8,6 +8,7 @@
   border: 1px solid black;
   border-radius: 9px;
   position: relative;
+  margin-top: 10px;
 }
 
 .sendmsg textarea {

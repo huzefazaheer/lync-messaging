@@ -10,13 +10,7 @@ export default function UserTop({ img, username, display_name }) {
     <div className={styles.top}>
       <div className={styles.usercard}>
         <img
-          src={
-            img
-              ? img
-              : user.profile_picture
-              ? user.profile_picture
-              : '/profileimg.png'
-          }
+          src={img ? img : user.photo ? user.photo : '/profileimg.png'}
           alt=""
         />
         <div>
