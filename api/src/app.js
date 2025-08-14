@@ -18,9 +18,12 @@ app.use(cors({ credentials: true, origin: true }))
 
 app.use(
   expressSession({
-    // cookie: {
-    //   maxAge: 7 * 24 * 60 * 60 * 1000, // ms,
-    // },
+    cookie: {
+      maxAge: 7 * 24 * 60 * 60 * 1000, // ms,
+      httpOnly: true,
+      secure: true, // Required for SameSite=None
+      sameSite: 'none',
+    },
     secret: 'cats',
     resave: false,
     saveUninitialized: true,
