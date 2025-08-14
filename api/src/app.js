@@ -16,22 +16,30 @@ const { messageRouter } = require('./routes/messagerouter')
 const app = express()
 app.use(cors({ credentials: true, origin: true }))
 
+// app.use(
+//   expressSession({
+//     cookie: {
+//       maxAge: 7 * 24 * 60 * 60 * 1000,
+//       httpOnly: true,
+//       secure: true,
+//       sameSite: 'none',
+//     },
+//     secret: 'cats',
+//     resave: false,
+//     saveUninitialized: true,
+//     store: new PrismaSessionStore(prisma, {
+//       checkPeriod: 2 * 60 * 1000, //ms
+//       dbRecordIdIsSessionId: true,
+//       dbRecordIdFunction: undefined,
+//     }),
+//   }),
+// )
 app.use(
   expressSession({
-    cookie: {
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-      httpOnly: true,
-      secure: true,
-      sameSite: 'none',
-    },
     secret: 'cats',
     resave: false,
     saveUninitialized: true,
-    // store: new PrismaSessionStore(prisma, {
-    //   checkPeriod: 2 * 60 * 1000, //ms
-    //   dbRecordIdIsSessionId: true,
-    //   dbRecordIdFunction: undefined,
-    // }),
+    // Start with minimal config
   }),
 )
 app.use(passport.initialize())
