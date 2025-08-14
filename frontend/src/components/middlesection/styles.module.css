@@ -32,8 +32,3 @@ hr {
   overflow-y: scroll;
   scrollbar-width: none;
 }
-
-.nochatsmessage {
-  font-size: 14px;
-  color: rgb(89, 89, 89);
-}

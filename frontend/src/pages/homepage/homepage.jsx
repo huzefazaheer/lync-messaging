@@ -1,7 +1,7 @@
 import styles from './home.module.css'
 
 import Sidebar from '../../components/sidebar/sidebar'
-import MiddleSec from '../../components/middlesecton/middlesection'
+import MiddleSec from '../../components/middlesection/middlesection'
 import Chat from '../../components/chat/chat'
 import { useContext, useEffect } from 'react'
 import { appContext } from '../../App'

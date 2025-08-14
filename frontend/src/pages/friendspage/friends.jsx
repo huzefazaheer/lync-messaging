@@ -6,14 +6,14 @@ import UserTop from '../../components/usertopinfo/userinfo'
 import { useNavigate } from 'react-router-dom'
 import useFetch from '../../utils/useFetch'
 import SearchUserCard from '../../components/searchuserprofile/searchprofile'
+import SearchUsers from '../../components/searchusers/searchusers'
 
 export default function Friends() {
   const app = useContext(appContext)
   const navigate = useNavigate()
   const friendsFetch = useFetch('users/friends', 'GET')
+  const [clearSearch, setClearSearch] = useState(false)
   const [friends, setFriends] = useState([])
-  const [search, setSearch] = useState('')
-  const [searchUsers, setSearchUsers] = useState('')
 
   useEffect(() => {
     if (app.user == null) navigate('/')
@@ -25,23 +25,12 @@ export default function Friends() {
 
   if (app.user == null) return
 
-  async function getUsers() {
-    if (search == '') {
-      setSearchUsers([])
-      return
-    }
-    const response = await fetch('http://localhost:8080/users/' + search, {
-      method: 'GET',
-      credentials: 'include',
-    })
-    const data = await response.json()
-    console.log(data)
-  }
+  console.log(friends)
 
   const friendsjsx = friendsFetch.loading ? (
     <p>Loading</p>
   ) : (
-    searchUsers.map((friend) => {
+    friends.map((friend) => {
       return (
         <SearchUserCard
           id={friend.id}
@@ -64,29 +53,20 @@ export default function Friends() {
         </div>
         <div className={styles.friends}>
           <h2>My Friends</h2>
-          <div className={styles.searchbar}>
-            <img src="/search.svg" alt="" />
-            <input
-              type="text"
-              placeholder="Search for friends..."
-              value={search}
-              onChange={(e) => {
-                setSearch(e.target.value)
-                setTimeout(() => {
-                  getUsers()
-                }, 500)
-              }}
-            />
-          </div>
+          <SearchUsers
+            clear={clearSearch}
+            setClear={setClearSearch}
+            setResults={setFriends}
+          />
           <div>
             {friendsjsx.length > 0 ? friendsjsx : <p>No friends added :(</p>}
           </div>
         </div>
 
-        <div>
+        {/* <div>
           <button>Remove Friend</button>
           <button>Create Group</button>
-        </div>
+        </div> */}
       </div>
     </div>
   )

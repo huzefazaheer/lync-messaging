@@ -14,3 +14,8 @@ body {
   padding: 0;
   margin: 0;
 }
+
+.nothing {
+  font-size: 14px;
+  color: rgb(89, 89, 89);
+}

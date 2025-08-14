@@ -1,6 +1,6 @@
 import styles from './styles.module.css'
 
-import Message from '../../components/message/message'
+import Message from '../message/message'
 import { useEffect, useState } from 'react'
 import useFetch from '../../utils/useFetch'
 import SearchUsers from '../searchusers/searchusers'
@@ -25,7 +25,13 @@ export default function MiddleSec() {
   const chatsjsx =
     chats?.length > 0 ? (
       chats.map((chat) => {
-        return <Message id={chat.id} users={chat.chat_users} />
+        return (
+          <Message
+            key={crypto.randomUUID()}
+            id={chat.id}
+            users={chat.chat_users}
+          />
+        )
       })
     ) : (
       <p>You don't have any chats yet</p>

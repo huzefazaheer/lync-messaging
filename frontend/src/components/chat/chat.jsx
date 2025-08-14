@@ -27,14 +27,20 @@ export default function Chat() {
       },
     )
     const data = await response.json()
-
+    if (data == null) return
     setMessages(data.messages)
   }
 
   const messagesjsx =
     messages.length > 0
       ? messages.map((msg) => {
-          return <ChatMessage msg={msg.text} isSent={msg.authorId == user.id} />
+          return (
+            <ChatMessage
+              key={crypto.randomUUID()}
+              msg={msg.text}
+              isSent={msg.authorId == user.id}
+            />
+          )
         })
       : 'Nothing to see here '
 
