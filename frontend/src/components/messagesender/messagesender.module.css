@@ -69,3 +69,17 @@
 .hidden {
   display: none;
 }
+
+@media (max-width: 768px) {
+  .sendmsg {
+    padding: 5px;
+    box-sizing: border-box;
+    position: fixed;
+    bottom: 0;
+    background-color: white;
+    width: 90vw;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+  }
+}

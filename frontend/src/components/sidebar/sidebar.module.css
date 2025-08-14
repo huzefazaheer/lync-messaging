@@ -69,11 +69,14 @@
   .logo p {
     flex-basis: content;
     flex-shrink: 0;
+    width: 100%;
+    margin-right: 20px;
   }
   .sidebar {
     border: none;
     flex-shrink: 1;
     height: auto;
+    width: 100%;
   }
   .menu {
     /* z-index: 10; */
@@ -100,7 +103,8 @@
   }
   .burger {
     display: block;
-    margin-left: 40px;
+    margin-left: auto;
+    margin-right: 20px;
   }
   .hidden {
     display: none;
