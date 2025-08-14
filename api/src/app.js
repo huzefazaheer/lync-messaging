@@ -19,7 +19,8 @@ app.use(cors({ credentials: true, origin: true }))
 app.use(
   expressSession({
     cookie: {
-      maxAge: 7 * 24 * 60 * 60 * 1000, // ms
+      maxAge: 7 * 24 * 60 * 60 * 1000, // ms,
+      sameSite: 'none',
     },
     secret: 'a santa at nasa 123',
     resave: true,
