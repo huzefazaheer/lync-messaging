@@ -17,7 +17,7 @@ export default function Login() {
   })
   const navigate = useNavigate()
 
-  function handleLogin(e) {
+  async function handleLogin(e) {
     e.preventDefault()
     if (username == '') {
       setError('Please provide your username')
@@ -32,16 +32,17 @@ export default function Login() {
       return
     }
     setError('')
-    sendData()
+    await sendData()
   }
 
   async function sendData() {
     if (username == '' || password == '') return
     const data = await loginFetch.fetchData()
+    console.log(data)
     if (data.error) {
       setError('Invalid username or password')
     } else {
-      app.setUser(loginFetch.data.user)
+      app.setUser(data.user)
       navigate('/')
     }
   }

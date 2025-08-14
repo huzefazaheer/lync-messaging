@@ -58,7 +58,7 @@ export default function SignUp() {
     if (data.error) {
       setError('Username already exists')
     } else {
-      const data = loginFetch.fetchData()
+      const data = await loginFetch.fetchData()
       app.setUser(data.user)
       navigate('/')
     }
@@ -101,17 +101,6 @@ export default function SignUp() {
             <button type="submit" onClick={(e) => handleSignup(e)}>
               {showPassword ? 'Sign Up' : 'Continue'}
             </button>
-            {/* <button
-              type="submit"
-              className={styles.secondary}
-              onClick={(e) => {
-                setUsername('user')
-                setPassword('user')
-                handleLogin(e)
-              }}
-            >
-              Continue as Guest
-            </button> */}
           </>
         ) : (
           <img className={styles.load} src="loading.gif" alt="" />
