@@ -109,3 +109,19 @@
 input:read-only {
   background-color: #ececec;
 }
+
+@media (max-width: 768px) {
+  .body {
+    flex-direction: column;
+    width: 100vw;
+  }
+
+  .profile {
+    overflow-y: auto;
+    height: fit-content;
+  }
+
+  .vert {
+    width: 45%;
+  }
+}

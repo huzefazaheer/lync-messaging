@@ -35,20 +35,23 @@
 }
 
 .usercard {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.usercard2 {
   margin-top: 20px;
   width: 60%;
   border-radius: 9px;
   display: flex;
   align-items: center;
   padding: 10px;
-  border-bottom: 1px solid var(--color-border);
 }
 
-.usercard input:first-of-type {
+.usercard2 input:first-of-type {
   margin-right: 20px;
 }
 
-.usercard .profile {
+.usercard2 .profile {
   flex-basis: 44px;
   height: 44px;
   margin-right: 20px;
@@ -74,29 +77,6 @@
   width: 20px;
   height: 20px;
   margin-left: auto;
-}
-
-.searchbar {
-  display: flex;
-  align-items: center;
-  border: 1px solid #7d7d7d;
-  border-radius: 9px;
-  padding: 6px 8px;
-}
-
-.searchbar input {
-  border: none;
-  border-radius: 9px;
-  margin-left: 5px;
-  font-weight: bold;
-  font-size: 16px;
-  font-family: Helvetica, sans-serif;
-}
-
-.searchbar input:hover,
-.searchbar input:focus {
-  border: none;
-  outline: none;
 }
 
 .btngroup {
@@ -142,6 +122,44 @@
 
 .about {
   font-size: 16px;
-  margin-top: 0;
+  margin-top: 5px;
   color: #7d7d7d;
+  margin-left: 50px;
+}
+
+@media (max-width: 768px) {
+  .body {
+    flex-direction: column;
+    width: 100vw;
+  }
+
+  .btngroup {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .btngroup button {
+    margin: 0;
+    margin-top: 20px;
+    padding: 10px 20px;
+    border-radius: 9px;
+    width: 200px;
+  }
+
+  .usercard2 {
+    width: 100%;
+    padding: 0;
+  }
+  .about {
+    margin-left: 5px;
+  }
+  .friends,
+  .active {
+    margin-left: 20px;
+    margin-right: 20px;
+    height: 70vh;
+  }
 }

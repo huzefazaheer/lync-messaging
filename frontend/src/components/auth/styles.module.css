@@ -115,3 +115,16 @@
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+@media (max-width: 768px) {
+  .logo {
+    position: fixed;
+    top: 10px !important;
+    left: 10px !important;
+  }
+
+  .authform {
+    width: 80%;
+    padding: 0;
+  }
+}

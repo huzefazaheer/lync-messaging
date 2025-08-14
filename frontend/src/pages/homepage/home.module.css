@@ -4,3 +4,10 @@
   overflow-x: hidden;
   height: 100vh;
 }
+
+@media (max-width: 768px) {
+  .home {
+    flex-direction: column;
+    width: 100vw;
+  }
+}

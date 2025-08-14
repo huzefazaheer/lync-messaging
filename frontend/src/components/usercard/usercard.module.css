@@ -1,7 +1,7 @@
 .usercard {
   margin-left: 20px;
   margin-top: 40px;
-  width: 90%;
+  width: 86%;
   background-color: #f4f6f7;
   border-radius: 9px;
   display: flex;
@@ -34,4 +34,14 @@
 
 .logout:hover {
   transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .usercard {
+    width: 90%;
+  }
+
+  .logout {
+    margin-left: auto;
+  }
 }

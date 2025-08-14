@@ -51,3 +51,58 @@
 .active p {
   color: black !important;
 }
+
+.burger {
+  display: none;
+  width: 42px;
+  height: 42px;
+}
+
+.hidden {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .logo {
+    align-items: center;
+  }
+  .logo p {
+    flex-basis: content;
+    flex-shrink: 0;
+  }
+  .sidebar {
+    border: none;
+    flex-shrink: 1;
+    height: auto;
+  }
+  .menu {
+    /* z-index: 10; */
+    position: fixed;
+    background-color: white;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    padding-left: 40px;
+    padding-top: 20px;
+    justify-content: flex-start;
+  }
+  .menu:last-child {
+    margin-top: 40px;
+  }
+  .second {
+    margin-top: 40px;
+  }
+  .usercard {
+    position: fixed;
+    bottom: 40px;
+    width: 86vw;
+  }
+  .burger {
+    display: block;
+    margin-left: 40px;
+  }
+  .hidden {
+    display: none;
+  }
+}

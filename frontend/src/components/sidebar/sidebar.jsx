@@ -1,19 +1,27 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import styles from './sidebar.module.css'
 import { appContext } from '../../App'
 import { useNavigate } from 'react-router-dom'
 import UserCard from '../usercard/usercard'
 
 export default function Sidebar() {
+  const [showMenu, setShowMenu] = useState(false)
+
   return (
     <>
       <div className={styles.sidebar}>
         <div className={styles.logo}>
           <img src="/logo.svg" alt="" />
           <p>Lync Messaging</p>
+          <img
+            onClick={() => setShowMenu((prev) => !prev)}
+            className={styles.burger}
+            src="/hamburger.svg"
+            alt=""
+          />
         </div>
 
-        <div className={styles.menu}>
+        <div className={`${styles.menu} ${!showMenu ? styles.hidden : ''}`}>
           <div>
             <MenuItem id={0} src={'/home.svg'} text={'Home'} url={'/'} />
             <MenuItem
@@ -30,7 +38,7 @@ export default function Sidebar() {
             />
           </div>
 
-          <div>
+          <div className={styles.second}>
             <MenuItem
               id={3}
               src={'/notifications.svg'}
@@ -46,7 +54,11 @@ export default function Sidebar() {
           </div>
         </div>
 
-        <UserCard />
+        <div
+          className={`${styles.usercard}  ${!showMenu ? styles.hidden : ''}`}
+        >
+          <UserCard />
+        </div>
       </div>
     </>
   )

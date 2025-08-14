@@ -129,31 +129,35 @@ function UserCard({
 }) {
   return (
     <div className={styles.usercard} key={id}>
-      <input
-        type="checkbox"
-        id="selected"
-        name="selected"
-        value="selected"
-        onClick={(e) => {
-          if (e.target.checked) {
-            setSelectedIds((prev) => [...prev, id])
-          } else {
-            setSelectedIds((prev) => prev.filter((prevId) => prevId != id))
+      <div className={styles.usercard2}>
+        <input
+          type="checkbox"
+          id="selected"
+          name="selected"
+          value="selected"
+          onClick={(e) => {
+            if (e.target.checked) {
+              setSelectedIds((prev) => [...prev, id])
+            } else {
+              setSelectedIds((prev) => prev.filter((prevId) => prevId != id))
+            }
+          }}
+        ></input>
+        <img
+          className={styles.profile}
+          src={
+            profile_picture
+              ? profile_picture
+              : `https://avatar.iran.liara.run/public?username=${username}`
           }
-        }}
-      ></input>
-      <img
-        className={styles.profile}
-        src={
-          profile_picture
-            ? profile_picture
-            : `https://avatar.iran.liara.run/public?username=${username}`
-        }
-        alt=""
-      />
+          alt=""
+        />
+        <div>
+          <p className={styles.displayname}>{display_name}</p>
+          <p className={styles.username}>@{username}</p>
+        </div>
+      </div>
       <div>
-        <p className={styles.displayname}>{display_name}</p>
-        <p className={styles.username}>@{username}</p>
         <p className={styles.about}>{about}</p>
       </div>
     </div>
