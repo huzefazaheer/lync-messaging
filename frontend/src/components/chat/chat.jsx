@@ -12,6 +12,7 @@ export default function Chat() {
   const { activeChatId, user, activeChatUser, activeChatType } =
     useContext(appContext)
   const [messages, setMessages] = useState([])
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     if (activeChatId == null) return
@@ -23,6 +24,7 @@ export default function Chat() {
   if (user == null) return
 
   async function getChatData() {
+    setLoading(true)
     const response = await fetch(
       'https://lync-messaging.onrender.com/chats/' + activeChatId,
       {
@@ -33,32 +35,34 @@ export default function Chat() {
     const data = await response.json()
     if (data == null) return
     setMessages(data.messages)
+    setLoading(false)
   }
 
-  const messagesjsx =
-    messages.length > 0
-      ? messages.map((msg) => {
-          if (activeChatType == 'GROUP') {
-            console.log(msg)
-            return (
-              <GroupChatMessage
-                key={crypto.randomUUID()}
-                msg={msg.text}
-                isSent={msg.authorId == user.id}
-                sender={msg.author.username}
-              />
-            )
-          }
-
+  const messagesjsx = loading
+    ? 'Loading'
+    : messages.length > 0
+    ? messages.map((msg) => {
+        if (activeChatType == 'GROUP') {
+          console.log(msg)
           return (
-            <ChatMessage
+            <GroupChatMessage
               key={crypto.randomUUID()}
               msg={msg.text}
               isSent={msg.authorId == user.id}
+              sender={msg.author.username}
             />
           )
-        })
-      : 'Nothing to see here '
+        }
+
+        return (
+          <ChatMessage
+            key={crypto.randomUUID()}
+            msg={msg.text}
+            isSent={msg.authorId == user.id}
+          />
+        )
+      })
+    : 'Nothing to see here '
 
   return (
     <div className={styles.chat}>

@@ -3,6 +3,7 @@
   padding-right: 50px;
   width: fit-content;
   height: 100vh;
+  flex-shrink: 0;
 }
 
 .logo {

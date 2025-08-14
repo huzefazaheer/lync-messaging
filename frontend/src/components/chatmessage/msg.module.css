@@ -1,8 +1,12 @@
 .txtmsg {
   width: fit-content;
-  padding: 8px 16px;
   border-radius: 9px;
   max-width: 80%;
+}
+
+.msg {
+  padding: 8px 16px;
+  border-radius: 9px;
 }
 
 .sent {

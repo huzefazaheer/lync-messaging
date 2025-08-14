@@ -108,8 +108,14 @@ export default function Profile() {
               }}
             />
             <button onClick={(e) => updateUserProfile(e)}>
-              <img src="/savechanges.svg" alt="" />
-              <p>Save Changes</p>
+              {updateUserFetch.loading ? (
+                <p>Updating</p>
+              ) : (
+                <>
+                  <img src="/savechanges.svg" alt="" />
+                  <p>Save Changes</p>
+                </>
+              )}
             </button>
           </form>
 
@@ -132,8 +138,14 @@ export default function Profile() {
               }
             />
             <button onClick={(e) => updateUserPassword(e)}>
-              <img src="/changepassowrd.svg" alt="" />
-              <p>Change Password</p>
+              {updatePasswordFetch.loading ? (
+                <p>Updating</p>
+              ) : (
+                <>
+                  <img src="/changepassowrd.svg" alt="" />
+                  <p>Change Password</p>
+                </>
+              )}
             </button>
           </form>
         </div>

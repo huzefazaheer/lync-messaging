@@ -58,8 +58,8 @@ export default function SignUp() {
     if (data.error) {
       setError('Username already exists')
     } else {
-      const data = await loginFetch.fetchData()
-      app.setUser(data.user)
+      const data2 = await loginFetch.fetchData()
+      app.setUser(data2.user)
       navigate('/')
     }
   }

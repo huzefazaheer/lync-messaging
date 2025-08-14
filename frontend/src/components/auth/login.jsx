@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import styles from './styles.module.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { appContext } from '../../App'
@@ -9,7 +9,7 @@ export default function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
-
+  const [login, setLogin] = useState(false)
   const app = useContext(appContext)
   const loginFetch = useFetch('login', 'POST', {
     username: username,
@@ -17,8 +17,13 @@ export default function Login() {
   })
   const navigate = useNavigate()
 
-  async function handleLogin(e) {
-    e.preventDefault()
+  useEffect(() => {
+    handleLogin()
+    setLogin(false)
+  }, [login])
+
+  async function handleLogin(e = null) {
+    if (e != null) e.preventDefault()
     if (username == '') {
       setError('Please provide your username')
       return
@@ -38,7 +43,6 @@ export default function Login() {
   async function sendData() {
     if (username == '' || password == '') return
     const data = await loginFetch.fetchData()
-    console.log(data)
     if (data.error) {
       setError('Invalid username or password')
     } else {
@@ -84,9 +88,11 @@ export default function Login() {
               type="submit"
               className={styles.secondary}
               onClick={(e) => {
+                e.preventDefault()
                 setUsername('user')
                 setPassword('user')
-                handleLogin(e)
+                setShowPassword(true)
+                setLogin(true)
               }}
             >
               Continue as Guest
