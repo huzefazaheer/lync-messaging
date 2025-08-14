@@ -23,6 +23,15 @@ app.use(
   }),
 )
 
+app.options(
+  '*',
+  cors({
+    origin: 'https://lync-messaging.vercel.app',
+    credentials: true,
+    allowedHeaders: ['Content-Type'],
+  }),
+)
+
 app.use(
   expressSession({
     cookie: {
@@ -30,7 +39,7 @@ app.use(
       httpOnly: true,
       secure: true,
       sameSite: 'none',
-      domain: '.render.com',
+      domain: '.onrender.com',
     },
     secret: 'a santa at nasa 123',
     resave: true,
@@ -42,6 +51,7 @@ app.use(
     }),
   }),
 )
+
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(express.json())
