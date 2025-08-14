@@ -7,12 +7,15 @@ const {
   getUserByUsernameController,
   updateUserController,
   getUserFriendsController,
+  deleteUserFriendsController,
 } = require('../controllers/usercontroller')
 const { isAuth, isAdmin } = require('../controllers/authcontroller')
 
 const userRouter = Router()
 
 userRouter.get('/friends', isAuth, getUserFriendsController)
+
+userRouter.delete('/friends', isAuth, deleteUserFriendsController)
 
 userRouter.get('/:username', isAuth, getUserByUsernameController)
 

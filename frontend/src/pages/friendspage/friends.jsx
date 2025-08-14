@@ -15,6 +15,10 @@ export default function Friends() {
   const [clearSearch, setClearSearch] = useState(false)
   const [friends, setFriends] = useState([])
   const [searchUsers, setSearchUsers] = useState([])
+  const [selectedIds, setSelectedIds] = useState([])
+  const deleteFriendsFetch = useFetch('users/friends', 'DELETE', {
+    friends: selectedIds,
+  })
 
   useEffect(() => {
     if (app.user == null) navigate('/')
@@ -23,9 +27,17 @@ export default function Friends() {
       setFriends(data.friends)
     }
     getFriends()
-  }, [])
+  }, [clearSearch])
 
   if (app.user == null) return
+
+  async function deleteFriends() {
+    await deleteFriendsFetch.fetchData()
+  }
+
+  async function createGroup() {
+    //Make a group
+  }
 
   const searchjsx =
     searchUsers.length > 0
@@ -37,6 +49,7 @@ export default function Friends() {
               username={user.username}
               profile_picture={`https://avatar.iran.liara.run/public?username=${user.username}`}
               showAddFriends={true}
+              setClearSearch={setClearSearch}
             />
           )
         })
@@ -53,6 +66,7 @@ export default function Friends() {
           username={friend.username}
           profile_picture={`https://avatar.iran.liara.run/public?username=${friend.username}`}
           about={friend.about}
+          setSelectedIds={setSelectedIds}
         />
       )
     })
@@ -80,15 +94,22 @@ export default function Friends() {
         </div>
 
         <div className={styles.btngroup}>
-          <button>Remove Friend</button>
-          <button>Create Group</button>
+          <button onClick={deleteFriends}>Remove Friend</button>
+          <button onClick={createGroup}>Create Group</button>
         </div>
       </div>
     </div>
   )
 }
 
-function UserCard({ id, display_name, username, profile_picture, about }) {
+function UserCard({
+  id,
+  display_name,
+  username,
+  profile_picture,
+  about,
+  setSelectedIds,
+}) {
   return (
     <div className={styles.usercard} key={id}>
       <input
@@ -96,6 +117,13 @@ function UserCard({ id, display_name, username, profile_picture, about }) {
         id="selected"
         name="selected"
         value="selected"
+        onClick={(e) => {
+          if (e.target.checked) {
+            setSelectedIds((prev) => [...prev, id])
+          } else {
+            setSelectedIds((prev) => prev.filter((prevId) => prevId != id))
+          }
+        }}
       ></input>
       <img
         className={styles.profile}

@@ -43,6 +43,20 @@ async function getUserFriends(id) {
   return userFriends
 }
 
+async function removeUserFriends(id, friends) {
+  const userFriends = await prisma.user.update({
+    where: { id: id },
+    data: {
+      friends: {
+        disconnect: friends.map((friend) => ({
+          id: friend,
+        })),
+      },
+    },
+  })
+  return userFriends
+}
+
 async function getUserChats(id) {
   const userFriends = await prisma.user.findUnique({
     where: { id: id },
@@ -89,4 +103,5 @@ module.exports = {
   getUserChats,
   getUserBySearch,
   updateUser,
+  removeUserFriends,
 }

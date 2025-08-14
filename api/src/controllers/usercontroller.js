@@ -7,6 +7,7 @@ const {
   getUserBySearch,
   updateUser,
   getUserFriends,
+  removeUserFriends,
 } = require('../models/userdb')
 
 async function getUserController(req, res) {
@@ -87,6 +88,16 @@ async function getUserFriendsController(req, res) {
   }
 }
 
+async function deleteUserFriendsController(req, res) {
+  try {
+    const friends = req.body.friends
+    const deletedfriends = await removeUserFriends(req.user.id, friends)
+    res.json({ success: 'Delete successfull' })
+  } catch (error) {
+    res.status(500).json('Internal database error')
+  }
+}
+
 module.exports = {
   getAllUsersController,
   getUserController,
@@ -95,4 +106,5 @@ module.exports = {
   getUserByUsernameController,
   updateUserController,
   getUserFriendsController,
+  deleteUserFriendsController,
 }
