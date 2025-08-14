@@ -14,7 +14,12 @@ const { chatRouter } = require('./routes/chatrouter')
 const { messageRouter } = require('./routes/messagerouter')
 
 const app = express()
-app.use(cors({ credentials: true, origin: true }))
+app.use(
+  cors({
+    credentials: true,
+    origin: ['https://lync-messaging.vercel.app'],
+  }),
+)
 
 app.use(
   expressSession({
