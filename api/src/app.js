@@ -19,33 +19,25 @@ app.use(
     origin: 'https://lync-messaging.vercel.app',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
+    exposedHeaders: ['Set-Cookie'],
     optionsSuccessStatus: 200,
-  }),
-)
-
-app.options(
-  '*',
-  cors({
-    origin: 'https://lync-messaging.vercel.app',
-    credentials: true,
-    allowedHeaders: ['Content-Type'],
   }),
 )
 
 app.use(
   expressSession({
     cookie: {
-      maxAge: 7 * 24 * 60 * 60 * 1000, // ms
+      maxAge: 7 * 24 * 60 * 60 * 1000,
       httpOnly: true,
       secure: true,
       sameSite: 'none',
-      domain: '.onrender.com',
     },
-    secret: 'a santa at nasa 123',
-    resave: true,
-    saveUninitialized: true,
+    secret: process.env.SESSION_SECRET || 'a santa at nasa 123', // Use env variable
+    resave: false, // Should be false unless you have a specific reason
+    saveUninitialized: false, // Should be false for better security
     store: new PrismaSessionStore(prisma, {
-      checkPeriod: 2 * 60 * 1000, //ms
+      checkPeriod: 2 * 60 * 1000,
       dbRecordIdIsSessionId: true,
       dbRecordIdFunction: undefined,
     }),
