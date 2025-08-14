@@ -19,18 +19,19 @@ app.use(cors({ credentials: true, origin: true }))
 app.use(
   expressSession({
     cookie: {
-      httpOnly: false, // Allow JS access for debugging
-      secure: false, // Work over HTTP too
-      sameSite: false, // No restrictions
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+      httpOnly: true,
+      secure: true,
+      sameSite: 'none',
     },
     secret: 'cats',
     resave: false,
     saveUninitialized: true,
-    store: new PrismaSessionStore(prisma, {
-      checkPeriod: 2 * 60 * 1000, //ms
-      dbRecordIdIsSessionId: true,
-      dbRecordIdFunction: undefined,
-    }),
+    // store: new PrismaSessionStore(prisma, {
+    //   checkPeriod: 2 * 60 * 1000, //ms
+    //   dbRecordIdIsSessionId: true,
+    //   dbRecordIdFunction: undefined,
+    // }),
   }),
 )
 app.use(passport.initialize())
