@@ -25,6 +25,13 @@ app.use(
   }),
 )
 
+app.use((req, res, next) => {
+  // Additional headers for cross-origin cookies
+  res.header('Access-Control-Allow-Credentials', 'true')
+  res.header('Vary', 'Origin')
+  next()
+})
+
 app.use(
   expressSession({
     cookie: {
@@ -32,6 +39,7 @@ app.use(
       httpOnly: true,
       secure: true,
       sameSite: 'none',
+      partitioned: false,
     },
     secret: process.env.SESSION_SECRET || 'a santa at nasa 123', // Use env variable
     resave: false, // Should be false unless you have a specific reason
