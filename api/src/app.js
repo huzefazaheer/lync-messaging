@@ -14,38 +14,23 @@ const { chatRouter } = require('./routes/chatrouter')
 const { messageRouter } = require('./routes/messagerouter')
 
 const app = express()
-app.use(
-  cors({
-    origin: 'https://lync-messaging.vercel.app',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization', 'Cookie'],
-    exposedHeaders: ['Set-Cookie'],
-    optionsSuccessStatus: 200,
-  }),
-)
+app.use(cors({ credentials: true, origin: true }))
 
 app.use(
   expressSession({
     cookie: {
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-
-      partitioned: false,
-      httpOnly: false, // Temporarily disable for testing
-      secure: false, // Temporarily disable for testing
-      sameSite: 'lax',
+      maxAge: 7 * 24 * 60 * 60 * 1000, // ms
     },
-    secret: process.env.SESSION_SECRET || 'a santa at nasa 123', // Use env variable
-    resave: false, // Should be false unless you have a specific reason
-    saveUninitialized: false, // Should be false for better security
+    secret: 'a santa at nasa 123',
+    resave: true,
+    saveUninitialized: true,
     store: new PrismaSessionStore(prisma, {
-      checkPeriod: 2 * 60 * 1000,
+      checkPeriod: 2 * 60 * 1000, //ms
       dbRecordIdIsSessionId: true,
       dbRecordIdFunction: undefined,
     }),
   }),
 )
-
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(express.json())
