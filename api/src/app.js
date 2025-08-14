@@ -73,6 +73,8 @@ app.use('/users', userRouter)
 app.use('/chats', chatRouter)
 app.use('/messages', messageRouter)
 
+app.use('/ping', (req, res) => res.json({ ping: 'Pinged' }))
+
 app.listen(8080, () => {
   console.log('Server started')
 })
