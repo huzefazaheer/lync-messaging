@@ -74,7 +74,7 @@
   .sendmsg {
     padding: 5px;
     box-sizing: border-box;
-    position: fixed;
+    z-index: 1;
     bottom: 0;
     background-color: white;
     width: 90vw;
