@@ -52,6 +52,11 @@ async function removeUserFriends(id, friends) {
           id: friend,
         })),
       },
+      friends_of: {
+        disconnect: friends.map((friend) => ({
+          id: friend,
+        })),
+      },
     },
   })
   return userFriends
@@ -78,7 +83,10 @@ async function getUserChats(id) {
 async function addUserFriend(userId, friendId) {
   const user = await prisma.user.update({
     where: { id: userId },
-    data: { friends: { connect: { id: friendId } } },
+    data: {
+      friends: { connect: { id: friendId } },
+      friends_of: { connect: { id: friendId } },
+    },
     include: { friends: { select: { id: true, username: true } } },
   })
   return user
