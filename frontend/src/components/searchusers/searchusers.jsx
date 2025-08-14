@@ -1,8 +1,16 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import styles from './search.module.css'
 
-export default function SearchUsers({ clear, setResults }) {
+export default function SearchUsers({ clear, setClear, setResults }) {
   const [search, setSearch] = useState('')
+
+  useEffect(() => {
+    if (clear) {
+      setSearch('')
+      setClear(false)
+      setResults([])
+    }
+  }, [clear])
 
   async function getUsers(searchValue) {
     if (searchValue == '') {
@@ -16,8 +24,6 @@ export default function SearchUsers({ clear, setResults }) {
     const data = await response.json()
     setResults(data)
   }
-
-  if (clear) setSearch('')
 
   return (
     <div className={styles.searchbar}>

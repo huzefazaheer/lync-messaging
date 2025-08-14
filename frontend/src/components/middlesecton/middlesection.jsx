@@ -4,6 +4,7 @@ import Message from '../../components/message/message'
 import { useEffect, useState } from 'react'
 import useFetch from '../../utils/useFetch'
 import SearchUsers from '../searchusers/searchusers'
+import SearchUserCard from '../searchuserprofile/searchprofile'
 
 export default function MiddleSec() {
   const [chats, setChats] = useState([])
@@ -14,8 +15,6 @@ export default function MiddleSec() {
   useEffect(() => {
     chatsFetch.fetchData()
   }, [])
-
-  console.log(searchUsers)
 
   useEffect(() => {
     if (!chatsFetch.loading && chatsFetch.data) {
@@ -36,11 +35,13 @@ export default function MiddleSec() {
     searchUsers.length > 0
       ? searchUsers.map((user) => {
           return (
-            <UserCard
+            <SearchUserCard
               id={user.id}
               display_name={user.display_name}
               username={user.username}
               chatsFetch={chatsFetch}
+              setClearSearch={setClearSearch}
+              showAddFriends={false}
             />
           )
         })
@@ -48,7 +49,11 @@ export default function MiddleSec() {
 
   return (
     <div className={styles.middle}>
-      <SearchUsers setResults={setSearchUsers} />
+      <SearchUsers
+        setResults={setSearchUsers}
+        clear={clearSearch}
+        setClear={setClearSearch}
+      />
       {searchusers.length > 0 ? (
         searchusers
       ) : (
@@ -57,54 +62,6 @@ export default function MiddleSec() {
           <div className={styles.msgs}>{chatsjsx}</div>
         </>
       )}
-    </div>
-  )
-}
-
-function UserCard({
-  id,
-  display_name,
-  username,
-  profile_picture,
-  chatsFetch,
-  setSearch,
-}) {
-  const newChatFetch = useFetch('chats', 'POST', {
-    users: [id],
-  })
-
-  //Sometimes says chat exists eve though it dose not
-  async function createNewChat() {
-    //Add validation or response to adding new chat
-    const data = await newChatFetch.fetchData()
-    if (!data.error) chatsFetch.fetchData()
-    setSearch('')
-  }
-
-  return (
-    <div className={styles.usercard} key={id}>
-      <img
-        className={styles.profile}
-        src={
-          profile_picture
-            ? profile_picture
-            : `https://avatar.iran.liara.run/public?username=${username}`
-        }
-        alt=""
-      />
-      <div>
-        <p className={styles.displayname}>{display_name}</p>
-        <p className={styles.username}>@{username}</p>
-      </div>
-      <div className={styles.iconholder}>
-        {/* <img className={styles.icon} src={'/addqueue.svg'} alt="" /> */}
-        <img
-          className={styles.icon}
-          src={'/sendmessage.svg'}
-          alt=""
-          onClick={createNewChat}
-        />
-      </div>
     </div>
   )
 }

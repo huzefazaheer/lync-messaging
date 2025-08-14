@@ -5,6 +5,7 @@ import { appContext } from '../../App'
 import UserTop from '../../components/usertopinfo/userinfo'
 import { useNavigate } from 'react-router-dom'
 import useFetch from '../../utils/useFetch'
+import SearchUserCard from '../../components/searchuserprofile/searchprofile'
 
 export default function Friends() {
   const app = useContext(appContext)
@@ -40,9 +41,9 @@ export default function Friends() {
   const friendsjsx = friendsFetch.loading ? (
     <p>Loading</p>
   ) : (
-    friends.map((friend) => {
+    searchUsers.map((friend) => {
       return (
-        <UserCard
+        <SearchUserCard
           id={friend.id}
           display_name={friend.display_name}
           username={friend.username}
@@ -86,35 +87,6 @@ export default function Friends() {
           <button>Remove Friend</button>
           <button>Create Group</button>
         </div>
-      </div>
-    </div>
-  )
-}
-
-function UserCard({ id, display_name, username, profile_picture }) {
-  return (
-    <div className={styles.usercard} key={id}>
-      <input
-        type="checkbox"
-        id="selected"
-        name="selected"
-        value="selected"
-      ></input>
-      <img
-        className={styles.profile}
-        src={
-          profile_picture
-            ? profile_picture
-            : `https://avatar.iran.liara.run/public?username=${username}`
-        }
-        alt=""
-      />
-      <div>
-        <p className={styles.displayname}>{display_name}</p>
-        <p className={styles.username}>@{username}</p>
-      </div>
-      <div className={styles.iconholder}>
-        {/* <img className={styles.icon} src={'/addqueue.svg'} alt="" /> */}
       </div>
     </div>
   )
