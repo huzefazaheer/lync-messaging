@@ -35,7 +35,7 @@ This project leverages a modern and robust tech stack:
 
 The app is live [Here](https://lync-messaging.vercel.app/)
 
-If it is down currently please first ping the render [Api}(https://lync-messaging.onrender.com/)
+If it is down currently please first ping the render [Api](https://lync-messaging.onrender.com/)
 
 
 ## Contributing
