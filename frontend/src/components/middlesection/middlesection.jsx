@@ -12,6 +12,7 @@ export default function MiddleSec() {
   const [clearSearch, setClearSearch] = useState(false)
   const chatsFetch = useFetch('chats', 'GET')
 
+  //todo get rid of 2 use effects
   useEffect(() => {
     chatsFetch.fetchData()
   }, [])

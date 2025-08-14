@@ -98,3 +98,44 @@
   border: none;
   outline: none;
 }
+
+.btngroup {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 20px;
+}
+
+.btngroup button {
+  margin-right: 20px;
+  padding: 10px 50px;
+  border-radius: 9px;
+}
+
+.btngroup button:first-of-type {
+  background-color: white;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+.btngroup button:last-of-type {
+  background-color: var(--color-accent);
+  border: none;
+  color: white;
+}
+
+.btngroup button:first-of-type:hover {
+  background-color: var(--color-accent);
+  color: white;
+}
+
+.btngroup button:last-of-type:hover {
+  background-color: var(--button-hover);
+}
+.btngroup button:first-of-type:active {
+  background-color: var(--button-active);
+}
+
+.btngroup button:last-of-type:active {
+  background-color: var(--button-active);
+}

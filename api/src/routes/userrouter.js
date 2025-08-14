@@ -12,6 +12,8 @@ const { isAuth, isAdmin } = require('../controllers/authcontroller')
 
 const userRouter = Router()
 
+userRouter.get('/friends', isAuth, getUserFriendsController)
+
 userRouter.get('/:username', isAuth, getUserByUsernameController)
 
 userRouter.get('/', isAuth, isAdmin, getAllUsersController)
@@ -21,8 +23,6 @@ userRouter.get('/:id', isAuth, getUserController)
 userRouter.get('/:id/chats', isAuth, getUserChatsController)
 
 userRouter.put('/add_friend/:id', isAuth, addFriendController)
-
-userRouter.get('/friends', isAuth, getUserFriendsController)
 
 userRouter.put('/', isAuth, updateUserController)
 

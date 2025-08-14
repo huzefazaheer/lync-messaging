@@ -38,11 +38,12 @@ async function getAllUsersController(req, res) {
 
 async function addFriendController(req, res) {
   try {
-    const friend = getUserById(req.params.id)
+    const friend = getUserById(req.body.friendid)
     if (!friend) res.status(402).json({ error: 'User does not exist' })
-    const u = await addUserFriend(req.user.id, req.params.id)
-    console.log(u)
+    const u = await addUserFriend(req.user.id, req.body.friendid)
+    res.json({ success: 'Friend added successfully' })
   } catch (error) {
+    console.log(error)
     res.status(500).json({ error: 'Internal Database Error' })
   }
 }
@@ -79,7 +80,7 @@ async function updateUserController(req, res) {
 
 async function getUserFriendsController(req, res) {
   try {
-    const friends = await getUserFriends(req.id)
+    const friends = await getUserFriends(req.user.id)
     res.json(friends)
   } catch (error) {
     res.error(500).json('Internal database error')

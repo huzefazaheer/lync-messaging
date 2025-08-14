@@ -13,7 +13,7 @@ export default function SearchUserCard({
   const newChatFetch = useFetch('chats', 'POST', {
     users: [id],
   })
-  const friendsFetch = useFetch('users', 'POST', {})
+  const friendsFetch = useFetch('users/add_friend', 'PUT', { friendid: id })
 
   //Sometimes says chat exists eve though it dose not
   async function createNewChat() {
@@ -26,7 +26,7 @@ export default function SearchUserCard({
   async function addFriend() {
     //Add validation or response to adding new chat
     const data = await friendsFetch.fetchData()
-    if (!data.error) chatsFetch.fetchData()
+    if (!data.error) friendsFetch.fetchData()
     setClearSearch(true)
   }
 
@@ -47,7 +47,12 @@ export default function SearchUserCard({
       </div>
       <div className={styles.iconholder}>
         {showAddFriends ? (
-          <img className={styles.icon} src={'/addqueue.svg'} alt="" />
+          <img
+            onClick={addFriend}
+            className={styles.icon}
+            src={'/addqueue.svg'}
+            alt=""
+          />
         ) : (
           ''
         )}
