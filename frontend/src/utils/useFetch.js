@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react'
 
 export default function useFetch(endpoint, method, body = null) {
-  const api = 'http://localhost:8080/' + endpoint
+  const api = 'https://lync-messaging.onrender.com/' + endpoint
 
   const [loading, isLoading] = useState(false)
   const [error, setError] = useState(false)

@@ -12,10 +12,13 @@ export default function Home() {
   const navigate = useNavigate()
 
   async function getUserSession() {
-    const response = await fetch('http://localhost:8080/isloggedin', {
-      method: 'GET',
-      credentials: 'include',
-    })
+    const response = await fetch(
+      'https://lync-messaging.onrender.com/isloggedin',
+      {
+        method: 'GET',
+        credentials: 'include',
+      },
+    )
     const data = await response.json()
     if (data.error) {
       navigate('/login')

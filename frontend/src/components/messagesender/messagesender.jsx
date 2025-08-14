@@ -15,7 +15,7 @@ export default function MessageSender({ setChange, setMessages }) {
         author: { username: user.username },
       },
     ])
-    await fetch('http://localhost:8080/messages', {
+    await fetch('https://lync-messaging.onrender.com/messages', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

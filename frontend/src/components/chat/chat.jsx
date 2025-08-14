@@ -24,7 +24,7 @@ export default function Chat() {
 
   async function getChatData() {
     const response = await fetch(
-      'http://localhost:8080/chats/' + activeChatId,
+      'https://lync-messaging.onrender.com/chats/' + activeChatId,
       {
         method: 'GET',
         credentials: 'include',

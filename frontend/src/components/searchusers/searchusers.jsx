@@ -17,10 +17,13 @@ export default function SearchUsers({ clear, setClear, setResults }) {
       setResults('')
       return
     }
-    const response = await fetch('http://localhost:8080/users/' + searchValue, {
-      method: 'GET',
-      credentials: 'include',
-    })
+    const response = await fetch(
+      'https://lync-messaging.onrender.com/users/' + searchValue,
+      {
+        method: 'GET',
+        credentials: 'include',
+      },
+    )
     const data = await response.json()
     setResults(data)
   }

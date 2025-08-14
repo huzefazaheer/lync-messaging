@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom'
 import useFetch from '../../utils/useFetch'
 import SearchUserCard from '../../components/searchuserprofile/searchprofile'
 import SearchUsers from '../../components/searchusers/searchusers'
-import createGroupChat from '../../components/creategroupchat/creategroupchat'
 import CreateGroupChat from '../../components/creategroupchat/creategroupchat'
 
 export default function Friends() {
@@ -46,10 +45,10 @@ export default function Friends() {
   }
 
   async function createGroup() {
-    if (selectedIds.length <= 2) {
+    if (selectedIds.length < 2) {
       return
     }
-    await newChatFetch.fetchData()
+    console.log(await newChatFetch.fetchData())
     navigate('/')
   }
 

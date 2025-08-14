@@ -79,7 +79,15 @@ export default function Login() {
                   : 'Login'
                 : 'Continue'}
             </button>
-            <button type="submit" className={styles.secondary}>
+            <button
+              type="submit"
+              className={styles.secondary}
+              onClick={(e) => {
+                setUsername('user')
+                setPassword('user')
+                handleLogin(e)
+              }}
+            >
               Continue as Guest
             </button>
           </>

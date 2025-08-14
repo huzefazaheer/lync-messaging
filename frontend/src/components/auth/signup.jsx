@@ -101,9 +101,17 @@ export default function SignUp() {
             <button type="submit" onClick={(e) => handleSignup(e)}>
               {showPassword ? 'Sign Up' : 'Continue'}
             </button>
-            <button type="submit" className={styles.secondary}>
+            {/* <button
+              type="submit"
+              className={styles.secondary}
+              onClick={(e) => {
+                setUsername('user')
+                setPassword('user')
+                handleLogin(e)
+              }}
+            >
               Continue as Guest
-            </button>
+            </button> */}
           </>
         ) : (
           <img className={styles.load} src="loading.gif" alt="" />
