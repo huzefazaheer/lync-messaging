@@ -2,7 +2,7 @@
   width: fit-content;
   padding: 8px 16px;
   border-radius: 9px;
-  max-width: 70%;
+  max-width: 80%;
 }
 
 .sent {
@@ -14,4 +14,21 @@
 .received {
   background-color: #f4f6f7;
   color: black;
+}
+
+.right {
+  margin-left: auto;
+}
+
+.right .groupp {
+  text-align: right;
+}
+
+.left .groupp {
+  text-align: left;
+}
+
+.groupp {
+  color: #969696;
+  margin-bottom: -10px;
 }

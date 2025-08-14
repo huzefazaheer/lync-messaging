@@ -12,6 +12,7 @@ export default function MessageSender({ setChange, setMessages }) {
       {
         text: text,
         authorId: user.id,
+        author: { username: user.username },
       },
     ])
     await fetch('http://localhost:8080/messages', {

@@ -2,9 +2,10 @@ import { useState } from 'react'
 
 export default function useData() {
   const [user, setUser] = useState(null)
-  const [activeChatId, setActiveChatId] = useState()
-  const [activeChatUser, setActiveChatUser] = useState()
+  const [activeChatId, setActiveChatId] = useState(null)
+  const [activeChatUser, setActiveChatUser] = useState(null)
   const [activePageIndex, setActivePageIndex] = useState(0)
+  const [activeChatType, setActiveChatType] = useState()
 
   function resetData() {
     setUser(null)
@@ -23,5 +24,7 @@ export default function useData() {
     activePageIndex,
     setActivePageIndex,
     resetData,
+    activeChatType,
+    setActiveChatType,
   }
 }

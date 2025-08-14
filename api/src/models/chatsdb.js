@@ -10,7 +10,9 @@ async function getAllChats() {
 async function getChatById(id) {
   const chat = await prisma.chat.findUnique({
     where: { id: id },
-    include: { messages: true },
+    include: {
+      messages: { include: { author: { select: { username: true } } } },
+    },
   })
   return chat
 }
@@ -22,7 +24,7 @@ async function getChatByUsers(ids) {
   return chat
 }
 
-async function createChat(userId, users) {
+async function createChat(userId, users, name = 'group chat', photo = '') {
   const ids = [userId, ...users]
   let chat
   if (ids.length > 2) {
@@ -32,6 +34,8 @@ async function createChat(userId, users) {
           connect: ids.map((id) => ({ id })),
         },
         chat_type: 'GROUP',
+        name: name,
+        photo: photo,
       },
     })
   } else {

@@ -1,16 +1,20 @@
 import styles from './chat.module.css'
 
-import ChatMessage from '../../components/chatmessage/chatmessage'
+import ChatMessage, {
+  GroupChatMessage,
+} from '../../components/chatmessage/chatmessage'
 import { useContext, useEffect, useState } from 'react'
 import { appContext } from '../../App'
 import MessageSender from '../messagesender/messagesender'
 import UserTop from '../usertopinfo/userinfo'
 
 export default function Chat() {
-  const { activeChatId, user, activeChatUser } = useContext(appContext)
+  const { activeChatId, user, activeChatUser, activeChatType } =
+    useContext(appContext)
   const [messages, setMessages] = useState([])
 
   useEffect(() => {
+    if (activeChatId == null) return
     if (activeChatId != '') {
       getChatData()
     }
@@ -34,6 +38,18 @@ export default function Chat() {
   const messagesjsx =
     messages.length > 0
       ? messages.map((msg) => {
+          if (activeChatType == 'GROUP') {
+            console.log(msg)
+            return (
+              <GroupChatMessage
+                key={crypto.randomUUID()}
+                msg={msg.text}
+                isSent={msg.authorId == user.id}
+                sender={msg.author.username}
+              />
+            )
+          }
+
           return (
             <ChatMessage
               key={crypto.randomUUID()}
@@ -48,7 +64,9 @@ export default function Chat() {
     <div className={styles.chat}>
       <UserTop
         img={
-          activeChatUser?.username
+          activeChatUser?.photo
+            ? activeChatUser.photo
+            : activeChatUser?.username
             ? `https://avatar.iran.liara.run/public?username=${activeChatUser.username}`
             : user?.photo
             ? user.photo

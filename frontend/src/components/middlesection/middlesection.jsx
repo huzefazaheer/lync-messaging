@@ -1,6 +1,6 @@
 import styles from './styles.module.css'
 
-import Message from '../message/message'
+import Message, { GroupChat } from '../message/message'
 import { useEffect, useState } from 'react'
 import useFetch from '../../utils/useFetch'
 import SearchUsers from '../searchusers/searchusers'
@@ -26,6 +26,17 @@ export default function MiddleSec() {
   const chatsjsx =
     chats?.length > 0 ? (
       chats.map((chat) => {
+        if (chat.chat_type == 'GROUP') {
+          return (
+            <GroupChat
+              key={crypto.randomUUID()}
+              id={chat.id}
+              users={chat.chat_users}
+              name={chat.name}
+              photo={chat.photo}
+            />
+          )
+        }
         return (
           <Message
             key={crypto.randomUUID()}

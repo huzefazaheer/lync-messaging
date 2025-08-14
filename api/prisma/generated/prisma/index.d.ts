@@ -3469,18 +3469,24 @@ export namespace Prisma {
     id: string | null
     chat_type: $Enums.ChatType | null
     date_created: Date | null
+    name: string | null
+    photo: string | null
   }
 
   export type ChatMaxAggregateOutputType = {
     id: string | null
     chat_type: $Enums.ChatType | null
     date_created: Date | null
+    name: string | null
+    photo: string | null
   }
 
   export type ChatCountAggregateOutputType = {
     id: number
     chat_type: number
     date_created: number
+    name: number
+    photo: number
     _all: number
   }
 
@@ -3489,18 +3495,24 @@ export namespace Prisma {
     id?: true
     chat_type?: true
     date_created?: true
+    name?: true
+    photo?: true
   }
 
   export type ChatMaxAggregateInputType = {
     id?: true
     chat_type?: true
     date_created?: true
+    name?: true
+    photo?: true
   }
 
   export type ChatCountAggregateInputType = {
     id?: true
     chat_type?: true
     date_created?: true
+    name?: true
+    photo?: true
     _all?: true
   }
 
@@ -3580,6 +3592,8 @@ export namespace Prisma {
     id: string
     chat_type: $Enums.ChatType
     date_created: Date
+    name: string | null
+    photo: string | null
     _count: ChatCountAggregateOutputType | null
     _min: ChatMinAggregateOutputType | null
     _max: ChatMaxAggregateOutputType | null
@@ -3603,6 +3617,8 @@ export namespace Prisma {
     id?: boolean
     chat_type?: boolean
     date_created?: boolean
+    name?: boolean
+    photo?: boolean
     chat_users?: boolean | Chat$chat_usersArgs<ExtArgs>
     messages?: boolean | Chat$messagesArgs<ExtArgs>
     _count?: boolean | ChatCountOutputTypeDefaultArgs<ExtArgs>
@@ -3612,21 +3628,27 @@ export namespace Prisma {
     id?: boolean
     chat_type?: boolean
     date_created?: boolean
+    name?: boolean
+    photo?: boolean
   }, ExtArgs["result"]["chat"]>
 
   export type ChatSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     chat_type?: boolean
     date_created?: boolean
+    name?: boolean
+    photo?: boolean
   }, ExtArgs["result"]["chat"]>
 
   export type ChatSelectScalar = {
     id?: boolean
     chat_type?: boolean
     date_created?: boolean
+    name?: boolean
+    photo?: boolean
   }
 
-  export type ChatOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "chat_type" | "date_created", ExtArgs["result"]["chat"]>
+  export type ChatOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "chat_type" | "date_created" | "name" | "photo", ExtArgs["result"]["chat"]>
   export type ChatInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     chat_users?: boolean | Chat$chat_usersArgs<ExtArgs>
     messages?: boolean | Chat$messagesArgs<ExtArgs>
@@ -3645,6 +3667,8 @@ export namespace Prisma {
       id: string
       chat_type: $Enums.ChatType
       date_created: Date
+      name: string | null
+      photo: string | null
     }, ExtArgs["result"]["chat"]>
     composites: {}
   }
@@ -4073,6 +4097,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Chat", 'String'>
     readonly chat_type: FieldRef<"Chat", 'ChatType'>
     readonly date_created: FieldRef<"Chat", 'DateTime'>
+    readonly name: FieldRef<"Chat", 'String'>
+    readonly photo: FieldRef<"Chat", 'String'>
   }
     
 
@@ -5646,7 +5672,9 @@ export namespace Prisma {
   export const ChatScalarFieldEnum: {
     id: 'id',
     chat_type: 'chat_type',
-    date_created: 'date_created'
+    date_created: 'date_created',
+    name: 'name',
+    photo: 'photo'
   };
 
   export type ChatScalarFieldEnum = (typeof ChatScalarFieldEnum)[keyof typeof ChatScalarFieldEnum]
@@ -5908,6 +5936,8 @@ export namespace Prisma {
     id?: StringFilter<"Chat"> | string
     chat_type?: EnumChatTypeFilter<"Chat"> | $Enums.ChatType
     date_created?: DateTimeFilter<"Chat"> | Date | string
+    name?: StringNullableFilter<"Chat"> | string | null
+    photo?: StringNullableFilter<"Chat"> | string | null
     chat_users?: UserListRelationFilter
     messages?: MessageListRelationFilter
   }
@@ -5916,6 +5946,8 @@ export namespace Prisma {
     id?: SortOrder
     chat_type?: SortOrder
     date_created?: SortOrder
+    name?: SortOrderInput | SortOrder
+    photo?: SortOrderInput | SortOrder
     chat_users?: UserOrderByRelationAggregateInput
     messages?: MessageOrderByRelationAggregateInput
   }
@@ -5927,6 +5959,8 @@ export namespace Prisma {
     NOT?: ChatWhereInput | ChatWhereInput[]
     chat_type?: EnumChatTypeFilter<"Chat"> | $Enums.ChatType
     date_created?: DateTimeFilter<"Chat"> | Date | string
+    name?: StringNullableFilter<"Chat"> | string | null
+    photo?: StringNullableFilter<"Chat"> | string | null
     chat_users?: UserListRelationFilter
     messages?: MessageListRelationFilter
   }, "id" | "id">
@@ -5935,6 +5969,8 @@ export namespace Prisma {
     id?: SortOrder
     chat_type?: SortOrder
     date_created?: SortOrder
+    name?: SortOrderInput | SortOrder
+    photo?: SortOrderInput | SortOrder
     _count?: ChatCountOrderByAggregateInput
     _max?: ChatMaxOrderByAggregateInput
     _min?: ChatMinOrderByAggregateInput
@@ -5947,6 +5983,8 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Chat"> | string
     chat_type?: EnumChatTypeWithAggregatesFilter<"Chat"> | $Enums.ChatType
     date_created?: DateTimeWithAggregatesFilter<"Chat"> | Date | string
+    name?: StringNullableWithAggregatesFilter<"Chat"> | string | null
+    photo?: StringNullableWithAggregatesFilter<"Chat"> | string | null
   }
 
   export type MessageWhereInput = {
@@ -6151,6 +6189,8 @@ export namespace Prisma {
     id?: string
     chat_type?: $Enums.ChatType
     date_created?: Date | string
+    name?: string | null
+    photo?: string | null
     chat_users?: UserCreateNestedManyWithoutChatsInput
     messages?: MessageCreateNestedManyWithoutChatInput
   }
@@ -6159,6 +6199,8 @@ export namespace Prisma {
     id?: string
     chat_type?: $Enums.ChatType
     date_created?: Date | string
+    name?: string | null
+    photo?: string | null
     chat_users?: UserUncheckedCreateNestedManyWithoutChatsInput
     messages?: MessageUncheckedCreateNestedManyWithoutChatInput
   }
@@ -6167,6 +6209,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     chat_type?: EnumChatTypeFieldUpdateOperationsInput | $Enums.ChatType
     date_created?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
     chat_users?: UserUpdateManyWithoutChatsNestedInput
     messages?: MessageUpdateManyWithoutChatNestedInput
   }
@@ -6175,6 +6219,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     chat_type?: EnumChatTypeFieldUpdateOperationsInput | $Enums.ChatType
     date_created?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
     chat_users?: UserUncheckedUpdateManyWithoutChatsNestedInput
     messages?: MessageUncheckedUpdateManyWithoutChatNestedInput
   }
@@ -6183,18 +6229,24 @@ export namespace Prisma {
     id?: string
     chat_type?: $Enums.ChatType
     date_created?: Date | string
+    name?: string | null
+    photo?: string | null
   }
 
   export type ChatUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     chat_type?: EnumChatTypeFieldUpdateOperationsInput | $Enums.ChatType
     date_created?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type ChatUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     chat_type?: EnumChatTypeFieldUpdateOperationsInput | $Enums.ChatType
     date_created?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MessageCreateInput = {
@@ -6463,18 +6515,24 @@ export namespace Prisma {
     id?: SortOrder
     chat_type?: SortOrder
     date_created?: SortOrder
+    name?: SortOrder
+    photo?: SortOrder
   }
 
   export type ChatMaxOrderByAggregateInput = {
     id?: SortOrder
     chat_type?: SortOrder
     date_created?: SortOrder
+    name?: SortOrder
+    photo?: SortOrder
   }
 
   export type ChatMinOrderByAggregateInput = {
     id?: SortOrder
     chat_type?: SortOrder
     date_created?: SortOrder
+    name?: SortOrder
+    photo?: SortOrder
   }
 
   export type EnumChatTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -7055,6 +7113,8 @@ export namespace Prisma {
     id?: string
     chat_type?: $Enums.ChatType
     date_created?: Date | string
+    name?: string | null
+    photo?: string | null
     messages?: MessageCreateNestedManyWithoutChatInput
   }
 
@@ -7062,6 +7122,8 @@ export namespace Prisma {
     id?: string
     chat_type?: $Enums.ChatType
     date_created?: Date | string
+    name?: string | null
+    photo?: string | null
     messages?: MessageUncheckedCreateNestedManyWithoutChatInput
   }
 
@@ -7164,6 +7226,8 @@ export namespace Prisma {
     id?: StringFilter<"Chat"> | string
     chat_type?: EnumChatTypeFilter<"Chat"> | $Enums.ChatType
     date_created?: DateTimeFilter<"Chat"> | Date | string
+    name?: StringNullableFilter<"Chat"> | string | null
+    photo?: StringNullableFilter<"Chat"> | string | null
   }
 
   export type MessageUpsertWithWhereUniqueWithoutAuthorInput = {
@@ -7287,6 +7351,8 @@ export namespace Prisma {
     id?: string
     chat_type?: $Enums.ChatType
     date_created?: Date | string
+    name?: string | null
+    photo?: string | null
     chat_users?: UserCreateNestedManyWithoutChatsInput
   }
 
@@ -7294,6 +7360,8 @@ export namespace Prisma {
     id?: string
     chat_type?: $Enums.ChatType
     date_created?: Date | string
+    name?: string | null
+    photo?: string | null
     chat_users?: UserUncheckedCreateNestedManyWithoutChatsInput
   }
 
@@ -7348,6 +7416,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     chat_type?: EnumChatTypeFieldUpdateOperationsInput | $Enums.ChatType
     date_created?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
     chat_users?: UserUpdateManyWithoutChatsNestedInput
   }
 
@@ -7355,6 +7425,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     chat_type?: EnumChatTypeFieldUpdateOperationsInput | $Enums.ChatType
     date_created?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
     chat_users?: UserUncheckedUpdateManyWithoutChatsNestedInput
   }
 
@@ -7479,6 +7551,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     chat_type?: EnumChatTypeFieldUpdateOperationsInput | $Enums.ChatType
     date_created?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
     messages?: MessageUpdateManyWithoutChatNestedInput
   }
 
@@ -7486,6 +7560,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     chat_type?: EnumChatTypeFieldUpdateOperationsInput | $Enums.ChatType
     date_created?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
     messages?: MessageUncheckedUpdateManyWithoutChatNestedInput
   }
 
@@ -7493,6 +7569,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     chat_type?: EnumChatTypeFieldUpdateOperationsInput | $Enums.ChatType
     date_created?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    photo?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MessageUpdateWithoutAuthorInput = {

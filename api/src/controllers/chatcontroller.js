@@ -36,8 +36,13 @@ async function createChatController(req, res) {
     const userIds = req.body.users
     const userIds_ = [...userIds, req.user.id]
     const chatExists = await getChatByUsers(userIds_)
-    if (chatExists == null) {
-      const chat = await createChat(req.user.id, userIds)
+    if (chatExists == null || userIds_.length > 2) {
+      const chat = await createChat(
+        req.user.id,
+        userIds,
+        req?.body?.name,
+        req?.body?.photo,
+      )
       res.json(chat)
     } else res.json({ error: 'Chat already exists' })
   } catch (error) {

@@ -35,6 +35,8 @@ model Chat {
   chat_type    ChatType  @default(DIRECT)
   messages     Message[] @relation("chatmessage")
   date_created DateTime  @default(now())
+  name         String?
+  photo        String?
 }
 
 model Message {

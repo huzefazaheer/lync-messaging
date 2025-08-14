@@ -25,7 +25,7 @@ userRouter.get('/:id', isAuth, getUserController)
 
 userRouter.get('/:id/chats', isAuth, getUserChatsController)
 
-userRouter.put('/add_friend/:id', isAuth, addFriendController)
+userRouter.put('/add_friend', isAuth, addFriendController)
 
 userRouter.put('/', isAuth, updateUserController)
 

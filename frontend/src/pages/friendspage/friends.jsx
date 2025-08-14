@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom'
 import useFetch from '../../utils/useFetch'
 import SearchUserCard from '../../components/searchuserprofile/searchprofile'
 import SearchUsers from '../../components/searchusers/searchusers'
+import createGroupChat from '../../components/creategroupchat/creategroupchat'
+import CreateGroupChat from '../../components/creategroupchat/creategroupchat'
 
 export default function Friends() {
   const app = useContext(appContext)
@@ -16,8 +18,16 @@ export default function Friends() {
   const [friends, setFriends] = useState([])
   const [searchUsers, setSearchUsers] = useState([])
   const [selectedIds, setSelectedIds] = useState([])
+  const [showGroupModal, setShowGroupModal] = useState(false)
+  const [groupdata, setgroupdata] = useState({ name: '', photo: '' })
+
   const deleteFriendsFetch = useFetch('users/friends', 'DELETE', {
     friends: selectedIds,
+  })
+  const newChatFetch = useFetch('chats', 'POST', {
+    users: selectedIds,
+    name: groupdata.name,
+    photo: groupdata.photo,
   })
 
   useEffect(() => {
@@ -36,7 +46,11 @@ export default function Friends() {
   }
 
   async function createGroup() {
-    //Make a group
+    if (selectedIds.length <= 2) {
+      return
+    }
+    await newChatFetch.fetchData()
+    navigate('/')
   }
 
   const searchjsx =
@@ -76,13 +90,17 @@ export default function Friends() {
 
   return (
     <div className={styles.body}>
+      <CreateGroupChat
+        showModal={showGroupModal}
+        groupdata={groupdata}
+        setShowModal={setShowGroupModal}
+        createGroup={createGroup}
+        setgroupdata={setgroupdata}
+      />
       <Sidebar />
       <div className={styles.rest}>
         <UserTop />
-        <div className={styles.active}>
-          <h2>Active Users</h2>
-          <div></div>
-        </div>
+
         <div className={styles.friends}>
           <h2>My Friends</h2>
           <SearchUsers
@@ -95,7 +113,7 @@ export default function Friends() {
 
         <div className={styles.btngroup}>
           <button onClick={deleteFriends}>Remove Friend</button>
-          <button onClick={createGroup}>Create Group</button>
+          <button onClick={() => setShowGroupModal(true)}>Create Group</button>
         </div>
       </div>
     </div>
@@ -137,7 +155,7 @@ function UserCard({
       <div>
         <p className={styles.displayname}>{display_name}</p>
         <p className={styles.username}>@{username}</p>
-        <p>{about}</p>
+        <p className={styles.about}>{about}</p>
       </div>
     </div>
   )

@@ -10,6 +10,7 @@
 .usercard img {
   flex-basis: 44px;
   height: 44px;
+  width: 44px;
 }
 
 .displayname {
@@ -40,4 +41,10 @@
   background-color: #f4f4f4;
   border-radius: 18px;
   transform: scale(1.05);
+}
+
+.groupchatimg {
+  border-radius: 44px;
+  width: 44px;
+  height: 44px;
 }
