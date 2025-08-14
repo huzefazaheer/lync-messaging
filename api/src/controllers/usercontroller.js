@@ -6,6 +6,7 @@ const {
   getUserByUsername,
   getUserBySearch,
   updateUser,
+  getUserFriends,
 } = require('../models/userdb')
 
 async function getUserController(req, res) {
@@ -76,6 +77,15 @@ async function updateUserController(req, res) {
   } else res.status(403).json({ error: 'Invalid data' })
 }
 
+async function getUserFriendsController(req, res) {
+  try {
+    const friends = await getUserFriends(req.id)
+    res.json(friends)
+  } catch (error) {
+    res.error(500).json('Internal database error')
+  }
+}
+
 module.exports = {
   getAllUsersController,
   getUserController,
@@ -83,4 +93,5 @@ module.exports = {
   getUserChatsController,
   getUserByUsernameController,
   updateUserController,
+  getUserFriendsController,
 }

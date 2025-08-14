@@ -34,7 +34,9 @@ async function getUserBySearch(name) {
 async function getUserFriends(id) {
   const userFriends = await prisma.user.findUnique({
     where: { id: id },
-    select: { friends: { select: { id: true, username: true } } },
+    select: {
+      friends: { select: { id: true, username: true, display_name: true } },
+    },
   })
   return userFriends
 }

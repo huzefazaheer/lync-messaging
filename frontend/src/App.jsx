@@ -5,6 +5,7 @@ import Home from './pages/homepage/homepage'
 import useData from './utils/websiteData'
 import { createContext } from 'react'
 import Profile from './pages/profilepage/profile'
+import Friends from './pages/friendspage/friends'
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const appContext = createContext({
@@ -30,7 +31,7 @@ function App() {
             <Route path="/signup" element={<SignUp />}></Route>
             <Route path="/" element={<Home />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
-            <Route path="/profile/:id" element={<Profile />}></Route>
+            <Route path="/friends" element={<Friends />}></Route>
           </Routes>
         </BrowserRouter>
       </appContext.Provider>
