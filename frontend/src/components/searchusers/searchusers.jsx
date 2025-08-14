@@ -4,12 +4,12 @@ import styles from './search.module.css'
 export default function SearchUsers({ clear, setResults }) {
   const [search, setSearch] = useState('')
 
-  async function getUsers() {
-    if (search == '') {
-      setResults([])
+  async function getUsers(searchValue) {
+    if (searchValue == '') {
+      setResults('')
       return
     }
-    const response = await fetch('http://localhost:8080/users/' + search, {
+    const response = await fetch('http://localhost:8080/users/' + searchValue, {
       method: 'GET',
       credentials: 'include',
     })
@@ -29,7 +29,7 @@ export default function SearchUsers({ clear, setResults }) {
         onChange={(e) => {
           setSearch(e.target.value)
           setTimeout(() => {
-            getUsers()
+            getUsers(e.target.value)
           }, 500)
         }}
       />

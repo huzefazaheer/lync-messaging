@@ -3,36 +3,25 @@ import styles from './styles.module.css'
 import Message from '../../components/message/message'
 import { useEffect, useState } from 'react'
 import useFetch from '../../utils/useFetch'
+import SearchUsers from '../searchusers/searchusers'
 
 export default function MiddleSec() {
   const [chats, setChats] = useState([])
-  const [search, setSearch] = useState('')
   const [searchUsers, setSearchUsers] = useState([])
-
+  const [clearSearch, setClearSearch] = useState(false)
   const chatsFetch = useFetch('chats', 'GET')
 
   useEffect(() => {
     chatsFetch.fetchData()
   }, [])
 
+  console.log(searchUsers)
+
   useEffect(() => {
     if (!chatsFetch.loading && chatsFetch.data) {
       setChats(chatsFetch.data.chats)
     }
   }, [chatsFetch.loading, chatsFetch.data])
-
-  async function getUsers() {
-    if (search == '') {
-      setSearchUsers([])
-      return
-    }
-    const response = await fetch('http://localhost:8080/users/' + search, {
-      method: 'GET',
-      credentials: 'include',
-    })
-    const data = await response.json()
-    setSearchUsers(data)
-  }
 
   const chatsjsx =
     chats?.length > 0 ? (
@@ -51,7 +40,6 @@ export default function MiddleSec() {
               id={user.id}
               display_name={user.display_name}
               username={user.username}
-              setSearch={setSearch}
               chatsFetch={chatsFetch}
             />
           )
@@ -60,32 +48,11 @@ export default function MiddleSec() {
 
   return (
     <div className={styles.middle}>
-      <div className={styles.searchbar}>
-        <img src="/search.svg" alt="" />
-        <input
-          type="text"
-          placeholder="Search"
-          value={search}
-          onChange={(e) => {
-            setSearch(e.target.value)
-            setTimeout(() => {
-              getUsers()
-            }, 500)
-          }}
-        />
-      </div>
-      {search != '' ? searchusers : ''}
-      {search != '' ? (
-        ''
+      <SearchUsers setResults={setSearchUsers} />
+      {searchusers.length > 0 ? (
+        searchusers
       ) : (
         <>
-          {/* <h3>Active Users</h3>
-          <div className={styles.userstatuses}>
-            <UserStatus profileimg={'/profileimg.png'} status={'idle'} />
-            <UserStatus profileimg={'/profileimg.png'} status={'active'} />
-            <UserStatus profileimg={'/profileimg.png'} status={'idle'} />
-          </div>
-          <hr /> */}
           <h3>Messages</h3>
           <div className={styles.msgs}>{chatsjsx}</div>
         </>
