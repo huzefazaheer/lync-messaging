@@ -16,8 +16,10 @@ const { messageRouter } = require('./routes/messagerouter')
 const app = express()
 app.use(
   cors({
+    origin: 'https://lync-messaging.vercel.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
-    origin: ['https://lync-messaging.vercel.app'],
+    optionsSuccessStatus: 200,
   }),
 )
 
